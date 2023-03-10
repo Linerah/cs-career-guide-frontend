@@ -1,0 +1,283 @@
+.Menu {
+    box-sizing: border-box;
+
+/* Auto layout */
+
+display: flex;
+align-items: center;
+padding: 9px 98px;
+gap: 48px;
+
+width: 100%;
+height: 72px;
+
+
+background: #14C38E;
+border-bottom: 1px solid #E7F6D2;
+}
+
+
+.Menu_button {
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+text-align: center;
+letter-spacing: 0.5px;
+
+color: #F2F0EB;
+
+cursor: pointer;
+
+
+}
+
+
+.Divider_Tittle {
+width: 76px;
+height: 24px;
+
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+text-align: center;
+letter-spacing: 0.5px;
+
+color: #14C38E;
+
+}
+
+.Divider {
+    width: 50%;
+    height: 0px;
+
+    border: 1px solid #14C38E;
+    margin-left: 2%;
+    margin-top: 12px;
+}
+
+.Divider_Tittle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+    color: #14C38E;
+}
+
+.Blog {
+    position: relative;
+    width: 407px;
+    height: 210px;
+    background: #14C38E;
+    border-radius: 15px;
+}
+.Blog_tittle {
+    position: relative;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height, or 120% */
+
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #F2F0EB;
+    height: 25%;
+    padding-top: 15px;
+}
+
+.Blog_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.Blog_information {
+    position: relative;
+
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    /* or 240% */
+
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #A2FFE0;
+    height: 50%;
+    padding: 0px 5px;
+
+
+}
+
+.Blog_button{
+    background-color: #00FFAB;
+    color: #1A6A52;
+    margin: 0;
+    padding: 5px 50px;
+}
+
+.Blog_button_container {
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.Organization {
+    display: flex;
+    align-items: center;
+
+    width: 407px;
+    height: 40%;
+}
+
+.Organization_image {
+    background: url(../../public/IEEE_logo.png);
+    
+}
+
+.Organization_tittle {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+    /* identical to box height, or 120% */
+
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #14C38E;
+    height: 25%;
+
+}
+
+.Organization_logo {
+    background-color: #14C38E;
+}
+
+.Organization_information {
+    color: #14C38E;
+    text-align: center;
+    font-size: 14px;
+    height: 75%;
+}
+
+.Organzation_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Organzation_button{
+    background-color: #00FFAB;
+    color: #1A6A52;
+    font-size: 15px;
+    margin: 0;
+    padding: 5px 25px;
+}
+
+.Organzation_button_container {
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.Research {
+    display: flex;
+    align-items: center;
+
+    width: 407px;
+    height: 40%;
+}
+
+.Research_image {
+    background: url(../../public/IEEE_logo.png);
+    
+}
+
+.Research_tittle {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+    /* identical to box height, or 120% */
+
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #14C38E;
+    height: 25%;
+
+}
+
+.Research_logo {
+    background-color: #14C38E;
+}
+
+.Research_information {
+    color: #14C38E;
+    text-align: center;
+    font-size: 14px;
+    height: 75%;
+}
+
+.Research_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Research_button{
+    background-color: #00FFAB;
+    color: #1A6A52;
+    font-size: 15px;
+    margin: 0;
+    padding: 5px 25px;
+}
+
+.Research_button_container {
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.profile_gradient{
+    background-color: #85FFBD;
+    background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+
+}
+
+
+
+
+
+
+
+
+
+
+
