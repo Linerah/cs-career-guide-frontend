@@ -1,17 +1,72 @@
+import Resource from './resource/Resource'
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useContext } from "react";
+import "./App.css"
+import { AuthContext } from "./auth/AuthContext";
+import Auth from './auth/Auth';
 function App() {
-  return (
-    <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
-      <p className="text-3xl text-gray-700 font-bold mb-5">
-        Welcome!
-      </p>
-      <p className="text-gray-500 text-lg">
-        React and Tailwind CSS in action
-      </p>
 
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Button
-        </button>
+  // const { currentUser } = useContext(AuthContext);
+  const queryClient = new QueryClient();
+
+
+  const Layout = () => {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <Outlet/>
+      </QueryClientProvider>
+    );
+  };
+
+  const ProtectedRoute = ({ children }) => {
+    if (true) {
+      return <Navigate to="/auth" />;
+    }
+    console.log(children)
+    return children;
+  };
+
+
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <ProtectedRoute>
+            <Layout />
+        </ProtectedRoute>
+      ),
+      children: [
+        {
+          path: "/",
+          element: <Resource />,
+        },
+      ],
+    },
+    {
+      path: "/auth",
+      element: <Auth />,
+    },
+    {
+      path: "/main", // using this for testing, delete after
+      element: <Resource />,
+    }
+  ]);
+
+
+  return (
+    <div className="App">
+
+      <RouterProvider router={router} />
     </div>
+    
+        
   );
 }
 export default App;

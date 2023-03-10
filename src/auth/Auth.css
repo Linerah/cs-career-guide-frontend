@@ -1,0 +1,82 @@
+.Login_container {
+    background: #14C38E;
+}
+
+.Login_tittle {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height, or 120% */
+
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #F2F0EB;
+}
+.Login_label {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    /* or 240% */
+
+    letter-spacing: 0.5px;
+
+    color: #A2FFE0;
+}
+
+.Login_button {
+    background-color: #00FFAB;
+    color: #1A6A52;
+    margin: 0;
+    padding: 5px 50px;
+}
+
+.Login_input {
+    color: #1A6A52;
+}
+
+.Register_container {
+    background: #14C38E;
+}
+
+.Register_tittle {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height, or 120% */
+
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #F2F0EB;
+}
+.Register_label {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    /* or 240% */
+
+    letter-spacing: 0.5px;
+
+    color: #A2FFE0;
+}
+
+.Register_button {
+    background-color: #00FFAB;
+    color: #1A6A52;
+    margin: 0;
+    padding: 5px 50px;
+}
+
+.Register_input {
+    color: #1A6A52;
+}
+
+.Divider_Auth {
+    width: 100%;
+    height: 0px;
+
+    border: 1px solid #00FFAB;
+    margin-left: 2%;
+    margin-top: 12px;
+}
