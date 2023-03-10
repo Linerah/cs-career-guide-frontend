@@ -10,6 +10,7 @@ import { useContext } from "react";
 import "./App.css"
 import { AuthContext } from "./auth/AuthContext";
 import Auth from './auth/Auth';
+import Quiz from "./quiz/quiz";
 function App() {
 
   // const { currentUser } = useContext(AuthContext);
@@ -56,6 +57,10 @@ function App() {
     {
       path: "/main", // using this for testing, delete after
       element: <Resource />,
+    },
+    {
+      path: "/quiz",
+      element: <Quiz />,
     }
   ]);
 
