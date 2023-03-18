@@ -9,10 +9,11 @@ export const AuthContextProvider = ({ children }) => {
   );
 
   const login = async (inputs) => {
-    const res = await axios.get("/the_end_point_to_log_in", {params: inputs}, {
+    const res = await axios.get("/login", {params: inputs}, {
       withCredentials: true,
     });
 
+  
     setCurrentUser(res.data)
   };
 
