@@ -1,5 +1,17 @@
 import "./Resource.css"
+import {useNavigate} from "react-router-dom";
+
 function Resource() {
+
+    let navigate = useNavigate();
+    
+
+    const handleLogout = (event) =>  {
+        if (localStorage.getItem('user') != null) {
+            localStorage.removeItem('user');     
+        }
+        navigate('/auth');
+    }
 
     return <>
     <div className="Menu">
@@ -24,7 +36,7 @@ function Resource() {
                 </div>
             </div>
             
-            <div className="Menu_button">
+            <div className="Menu_button" onClick={handleLogout}>
                 Logout        
             </div>  
         </div>
