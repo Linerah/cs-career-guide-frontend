@@ -16,7 +16,7 @@ function Resource() {
 
     return <>
     
-    <Banner />
+    <Banner page="home"/>
 
     <div className="flex justify-center my-9">
         
