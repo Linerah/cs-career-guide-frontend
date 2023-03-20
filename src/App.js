@@ -13,7 +13,7 @@ import Auth from './auth/Auth';
 import Quiz from "./quiz/quiz";
 function App() {
 
-  // const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const queryClient = new QueryClient();
 
 
@@ -26,7 +26,7 @@ function App() {
   };
 
   const ProtectedRoute = ({ children }) => {
-    if (true) {
+    if (!currentUser) {
       return <Navigate to="/auth" />;
     }
     console.log(children)
@@ -45,7 +45,7 @@ function App() {
       ),
       children: [
         {
-          path: "/",
+          path: "/home",
           element: <Resource />,
         },
       ],
@@ -53,10 +53,6 @@ function App() {
     {
       path: "/auth",
       element: <Auth />,
-    },
-    {
-      path: "/main", // using this for testing, delete after
-      element: <Resource />,
     },
     {
       path: "/quiz",
