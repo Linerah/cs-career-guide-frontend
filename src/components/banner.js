@@ -1,15 +1,45 @@
-export default function Banner(){
+import {useNavigate} from "react-router-dom";
+
+const Banner = ({page}) =>{
+    let aiButtonClass;
+    let resourcesButtonClass
+    let quizButtonClass;
+
+    switch (page){
+        case 'home':
+            aiButtonClass = 'Menu_button';
+            resourcesButtonClass = 'Menu_button underline underline-offset-4';
+            quizButtonClass = 'Menu_button';
+            break;
+
+        case 'quiz':
+            aiButtonClass = 'Menu_button';
+            resourcesButtonClass = 'Menu_button';
+            quizButtonClass = 'Menu_button underline underline-offset-4';
+            break;
+
+        default:
+            aiButtonClass = 'Menu_button';
+            resourcesButtonClass = 'Menu_button';
+            quizButtonClass = 'Menu_button';
+    }
+
+    const handleButtonClick = () => {
+
+    }
+    let navigate = useNavigate()
     return(
         <div className="Menu">
             <div className="flex w-1/4 space-x-6 justify-center">
-                <div className="Menu_button">
+                <div className= {aiButtonClass}>
                     AI
                 </div>
-                <div className="Menu_button underline underline-offset-4">
+                <div className= {resourcesButtonClass} onClick={() => navigate('/home')}>
                     Resources
                 </div>
-                <div className="Menu_button">
+                <div className= {quizButtonClass} onClick={() => navigate('/quiz') }>
                     Quiz
+
                 </div>
             </div>
 
@@ -30,3 +60,4 @@ export default function Banner(){
         </div>
     )
 }
+export default Banner;
