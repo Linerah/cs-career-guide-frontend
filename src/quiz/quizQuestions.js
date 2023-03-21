@@ -39,7 +39,7 @@ const quizQuestions = {
       question:
           'Which of the following relates to you best?',
       choices: [
-          'I am able to retain what people have told me for some time.   ',
+          'I am able to retain what people have told me for some time.',
           'I remember the places I\'ve been to and how they look like in detail.',
           'I need to get involved in what I do in order to remember it'],
     },
