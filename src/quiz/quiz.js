@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import Banner from "../components/banner";
 import quizQuestions from "./quizQuestions";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 const Quiz = () => {
   const [activeQuestion, setActiveQuestion] = useState(0)
   const [showResult, setShowResult] = useState(false)
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null)
-  const [results] = useState([])
+  const [answers] = useState([])
+  const [results] = useState({'answers': ''})
   const { questions } = quizQuestions
   const { question, choices} = questions[activeQuestion]
-
-  const onClickNext = () => {
+  let navigate = useNavigate();
+  const onClickNext = async (e) => {
     setSelectedAnswerIndex(null)
 
     if (activeQuestion !== questions.length - 1) {
@@ -18,13 +21,25 @@ const Quiz = () => {
     } else {
       setActiveQuestion(0)
       setShowResult(true)
+
+      e.preventDefault();
+      results.answers = answers
+      try {
+        console.log(results)
+        await axios.post('/quizAI', results);
+        let path = "/quiz";
+        navigate(path);
+
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
   // Saves the answer as a multi-dimensional Array, ready to be processed
   // Ex. [ [0,1], [0,1,0] ]
   const onAnswerSelected = (answer, index) => {
     setSelectedAnswerIndex(index)
-    results.push(answer)
+    answers.push(answer)
 
     // Method used before for saving answer as multidimensional array
 
@@ -93,8 +108,7 @@ const Quiz = () => {
                       className="bg-colegio-background flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-tr from-colegio-light-green to-colegio-green animate-spin">
                       <div className="h-24 w-24 rounded-full bg-colegio-background"></div> </div>
                   </div>
-                  {results.map((x) => <p>{x}</p>) //Temp for showing what quiz returns
-                       }
+
         </div>
       )}
 
