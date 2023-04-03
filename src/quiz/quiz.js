@@ -8,7 +8,7 @@ const Quiz = () => {
   const [activeQuestion, setActiveQuestion] = useState(0)
   const [showResult, setShowResult] = useState(false)
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null)
-  const [answers] = useState([])
+  const [answers] = useState({})
   const [results] = useState({'answers': ''})
   const { questions } = quizQuestions
   const { question, choices} = questions[activeQuestion]
@@ -39,7 +39,8 @@ const Quiz = () => {
   // Ex. [ [0,1], [0,1,0] ]
   const onAnswerSelected = (answer, index) => {
     setSelectedAnswerIndex(index)
-    answers.push(answer)
+    let current = activeQuestion + 1
+    answers['Answer_' + current] = answer
 
     // Method used before for saving answer as multidimensional array
 
