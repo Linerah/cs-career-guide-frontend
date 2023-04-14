@@ -5,6 +5,8 @@ const Banner = ({page}) =>{
     let resourcesButtonClass
     let quizButtonClass;
 
+    
+
     switch (page){
         case 'home':
             aiButtonClass = 'Menu_button';
@@ -28,6 +30,13 @@ const Banner = ({page}) =>{
 
     }
     let navigate = useNavigate()
+
+    const handleLogout = (event) =>  {
+        if (localStorage.getItem('user') != null) {
+            localStorage.removeItem('user');     
+        }
+        navigate('/auth');
+    }
     return(
         <div className="Menu">
             <div className="flex w-1/4 space-x-6 justify-center">
@@ -53,7 +62,7 @@ const Banner = ({page}) =>{
                         <img className="h-10" src="https://api.dicebear.com/5.x/adventurer/svg?seed=KevinL" alt="profile"/>
                     </div>
                 </div>
-                <div className="Menu_button">
+                <div className="Menu_button" onClick={handleLogout}>
                     Logout
                 </div>
             </div>

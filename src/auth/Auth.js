@@ -74,6 +74,7 @@ function Register(){
 
 
     const handleChange = (e) => {
+        console.log(inputs)
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
@@ -82,7 +83,7 @@ function Register(){
         e.preventDefault();
 
         try {
-            await axios.post("/register", inputs);
+            await axios.post("https://cs-career-guide-auth-service.herokuapp.com/register", inputs);
             let path = "/auth";
             navigate(path);
 

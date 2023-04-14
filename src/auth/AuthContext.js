@@ -9,7 +9,7 @@ export const AuthContextProvider = ({ children }) => {
   );
 
   const login = async (inputs) => {
-    const res = await axios.get("/login", {params: inputs}, {
+    const res = await axios.get("https://cs-career-guide-auth-service.herokuapp.com/login", {params: inputs}, {
       withCredentials: true,
     });
 

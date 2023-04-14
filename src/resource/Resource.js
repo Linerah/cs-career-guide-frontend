@@ -4,15 +4,6 @@ import {useNavigate} from "react-router-dom";
 
 function Resource() {
 
-    let navigate = useNavigate();
-    
-
-    const handleLogout = (event) =>  {
-        if (localStorage.getItem('user') != null) {
-            localStorage.removeItem('user');     
-        }
-        navigate('/auth');
-    }
 
     return <>
     
