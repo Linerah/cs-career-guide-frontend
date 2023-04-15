@@ -45,14 +45,14 @@ function App() {
       ),
       children: [
         {
-          path: "/home",
-          element: <Resource />,
+          path: "/auth",
+          element: <Auth />,
         },
       ],
     },
     {
-      path: "/auth",
-      element: <Auth />,
+      path: "/home",
+      element: <Resource />,
     },
     {
       path: "/quiz",
