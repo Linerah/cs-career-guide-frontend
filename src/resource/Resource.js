@@ -1,9 +1,28 @@
 import "./Resource.css"
 import Banner from "../components/banner";
 import {useNavigate} from "react-router-dom";
-
+import React, {useState, useEffect} from 'react';
+import Search from "../search/Search";
+import axios from "axios";
 function Resource() {
+    const [blogs, setBlogs] = useState([]);
+    const handleBlogValues = (blogValues) => {
+        console.log('Im heree')
+        console.log(blogValues)
+        setBlogs(blogValues);
+    };
 
+    useEffect(() => {
+        axios.get('https://cscg-blog-search-service.herokuapp.com/blogs')
+          .then(response => {
+            console.log(response.data)
+            setBlogs(response.data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }, []);
+   
 
     return <>
     
@@ -11,17 +30,23 @@ function Resource() {
 
     <div className="flex justify-center my-9">
         
-        <div className="Divider_Tittle"> Blogs</div>
+        <div className="Divider_Tittle"> Blogs </div>
             <div className="Divider">
+            
         </div>
+        <Search onBlogs={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most read", "Most upvote"]}}/> 
     </div>
+    
     <div className="flex space-x-6 justify-center">
-        <Blog /><Blog /><Blog />
+    {blogs.map((blog) => (
+            <Blog data={{title: blog.title , information: blog.information , link: blog.link}}/>
+        ))}
     </div>
     <div className="flex justify-center my-9">
         <div className="Divider_Tittle">Organizations</div>
             <div className="Divider">
         </div>
+        <Search  data={{route: "",resource: "orgs", options: ["","Newest", "Oldest", "Most upvote"]}}/> 
     </div>
     <div className="flex space-x-6 justify-center">
         <Organization /><Organization /><Organization />
@@ -30,6 +55,7 @@ function Resource() {
         <div className="Divider_Tittle">Research</div>
             <div className="Divider">
         </div>
+        <Search  data={{route: "",resource: "research", options: ["","Newest", "Oldest"]}}/> 
     </div>
     <div className="flex space-x-6 justify-center">
         <Research /><Research /> <Research />
@@ -38,16 +64,21 @@ function Resource() {
 }
 export default Resource;
 
-function Blog() {
+function Blog(props) {
+
+    const handleButtonClick = () => {
+        window.open("https://" + props.data.link, '_blank');
+      };
+
     return <div className="Blog flex overflow-hidden justify-center">
         
             <img className=" w-1/2" src="mchine.jpg" alt="logo"></img>
             <div className="Blog_container w-1/2 overflow-hidden">
-                <h1 className="Blog_tittle">Machine Learning
+                <h1 className="Blog_tittle">{props.data.title}
                 </h1>
-                <h2 className="Blog_information">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</h2>
+                <h2 className="Blog_information">{props.data.information}</h2>
                 <div className="Blog_button_container">
-                    <button className="Blog_button rounded-lg font-bold">
+                    <button className="Blog_button rounded-lg font-bold" onClick={handleButtonClick}>
                         Read 
                     </button>
                 </div>
