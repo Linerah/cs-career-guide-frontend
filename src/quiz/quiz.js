@@ -130,9 +130,11 @@ const Quiz = () => {
                   <div className="border-b-2  m-8 border-colegio-light-green">
                       <div className="text-colegio-background font-sans font-bold text-xl m-2 text-center">CS Career Guide AI Quiz</div>
                   </div>
+            <div>
             <p className="text-colegio-background font-sans font-bold text-lg m-2 text-center">Your recommended career path is: </p>
-            <p className="text-colegio-background font-sans font-bold text-4xl m-2 text-center m-32">{responseState.message}</p>
- </div>
+            <p className="text-colegio-background font-sans font-bold text-4xl m-2 text-center mt-12 m-24">{responseState.message}</p>
+            </div>
+          </div>
             ): (
                 <p>Error: {responseState.message}</p>)
             }
