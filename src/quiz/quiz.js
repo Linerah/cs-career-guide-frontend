@@ -13,6 +13,10 @@ const Quiz = () => {
   const { questions } = quizQuestions
   const { question, choices} = questions[activeQuestion]
   let navigate = useNavigate();
+  const [responseState, setResponseState] = useState({
+    success: null,
+    message: '',
+  });
   const onClickNext = async (e) => {
     setSelectedAnswerIndex(null)
 
@@ -26,10 +30,16 @@ const Quiz = () => {
       results.answers = answers
       try {
         console.log(results)
-        await axios.post('/quizAI', results);
-        let path = "/quiz";
-        navigate(path);
+        let test
+        test = await axios.post('/quizAI', results).then((response) => {
+          setResponseState({
+          success: response.status,
+          message: response.data.result,
+        });})
 
+        //let path = "/quiz";
+        //navigate(path);
+        console.log(test)
       } catch (err) {
         console.log(err)
       }
@@ -57,61 +67,77 @@ const Quiz = () => {
     // results[activeQuestion] = temp
 
   }
+        console.log(responseState.success)
+        console.log(responseState.message)
 
   const addLeadingZero = (number) => (number > 9 ? number : `0${number}`)
 
   return <>
     <Banner page = "quiz" />
-    <div className="bg-colegio-background flex justify-center h-screen">
-        <div className="m-16 h-fit border-2 border-colegio-dark-green rounded-md ">
+    <div className="bg-colegio-background flex justify-center ">
+        <div className="m-16 h-fit bg-colegio-green rounded-md w-5/12 h-max">
             {!showResult ? (
         <div>
 
-            <div className="border-b-2 border-colegio-dark-green">
-              <div className="text-colegio-dark-green font-sans font-bold text-xl m-2 text-center">CS Career Guide AI Quiz</div>
+            <div className="border-b-2 m-8 border-colegio-light-green">
+              <div className="text-colegio-background font-sans font-bold text-2xl m-2 text-center">CS Career Guide AI Quiz</div>
                 <div className="grid m-2 place-content-end">
-                    <span className="text-colegio-dark-green font-sans font-bold text-lg">
+                    <span className="text-colegio-green-2 font-sans font-bold text-lg">
                         {addLeadingZero(activeQuestion + 1)}/{addLeadingZero(questions.length)}
                     </span>
                 </div>
             </div>
 
-            <h2 className="text-colegio-dark-green font-sans font-bold text-xl m-2 pb-4 text-center">{question}</h2>
+            <h2 className="text-colegio-background font-sans font-bold text-2xl m-2 pb-4 text-center">{question}</h2>
 
-            <div className="grid grid-cols-2 ">
+            <div className="grid place-content-center align-center justify-center grid-cols-2">
                 {choices.map((answer, index) => (
-                    <span className="grid place-content-center align-bottom w-80 h-24 text-center bg-colegio-background  hover:bg-colegio-light-green text-colegio-dark-green text-base font-sans font-bold rounded-full border-4 m-4 border-colegio-green"
+                    <span className="grid place-content-center justify-self-center  align-bottom w-64 h-20 text-center bg-colegio-light-green  hover:bg-colegio-light-green text-colegio-dark-green text-base font-sans font-bold rounded-2xl border-4 m-4 border-colegio-green"
                         onClick={() => onAnswerSelected(answer, index)}
                         key={answer}
                         className={
-                            selectedAnswerIndex === index ? 'grid place-content-center w-80 h-24 text-center bg-colegio-light-green text-colegio-dark-green text-base font-sans font-bold rounded-full border-4 m-4 border-colegio-dark-green' : "grid place-content-center w-80 h-24 text-center  bg-colegio-background hover:bg-colegio-light-green text-colegio-dark-green text-base font-sans font-bold rounded-full border-4 m-4 border-colegio-green"
+                            selectedAnswerIndex === index ? 'grid place-content-center justify-self-center  w-64 h-20 text-center bg-colegio-green-2 text-colegio-dark-green text-base font-sans font-bold rounded-2xl border-4 m-4 border-colegio-green-2' :
+                                "grid place-content-center justify-self-center  w-64 h-20 text-center  bg-colegio-light-green  hover:bg-colegio-green-2 text-colegio-dark-green text-base font-sans font-bold rounded-2xl border-4 m-4 border-colegio-green"
                         }>
 
                         <p>{answer}</p>
                     </span>
                 ))}
             </div>
-            <button className=" m-4 relative float-right bg-colegio-light-green hover:bg-colegio-green text-colegio-dark-green text-base font-sans font-bold rounded-full w-24 h-10 disabled:opacity-75"
+            <button className=" m-4 relative float-right bg-colegio-light-green hover:bg-colegio-green-2 text-colegio-dark-green text-base font-sans font-bold rounded-lg w-24 h-10 disabled:opacity-25"
               onClick={onClickNext}
               disabled={selectedAnswerIndex === null}>
               {activeQuestion === questions.length - 1 ? 'Finish' : 'Next'}
             </button>
         </div>
-      ) : (
+      ) : responseState.success == null ? (
               <div>
-                  <div className="border-b-2 border-colegio-dark-green">
-                      <div className="text-colegio-dark-green font-sans font-bold text-xl m-2 text-center">CS Career Guide AI Quiz</div>
+                  <div className="border-b-2  m-8 border-colegio-light-green">
+                      <div className="text-colegio-background font-sans font-bold text-xl m-2 text-center">CS Career Guide AI Quiz</div>
                   </div>
-                    <p className="text-colegio-dark-green font-sans font-bold text-lg m-2 text-center">Thank you for taking the Quiz!</p>
-                    <p className="text-colegio-dark-green font-sans font-bold text-lg m-2 text-center">Our AI is processing your answer and you will be redirected shortly.</p>
+                    <p className="text-colegio-background font-sans font-bold text-lg m-2 text-center">Thank you for taking the Quiz!</p>
+                    <p className="text-colegio-background font-sans font-bold text-lg m-2 text-center">Our AI is processing your answer and you will be redirected shortly.</p>
                   <div className="flex justify-center m-4">
                   <div
-                      className="bg-colegio-background flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-tr from-colegio-light-green to-colegio-green animate-spin">
-                      <div className="h-24 w-24 rounded-full bg-colegio-background"></div> </div>
+                      className="bg-colegio-background flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-tr from-colegio-green-2 to-colegio-green animate-spin">
+                      <div className="h-24 w-24 rounded-full bg-colegio-green"></div> </div>
                   </div>
 
         </div>
-      )}
+      ): responseState.success>= 200 && responseState.success < 300 ?(
+
+          <div>
+                  <div className="border-b-2  m-8 border-colegio-light-green">
+                      <div className="text-colegio-background font-sans font-bold text-xl m-2 text-center">CS Career Guide AI Quiz</div>
+                  </div>
+            <div>
+            <p className="text-colegio-background font-sans font-bold text-lg m-2 text-center">Your recommended career path is: </p>
+            <p className="text-colegio-background font-sans font-bold text-4xl m-2 text-center mt-12 m-24">{responseState.message}</p>
+            </div>
+          </div>
+            ): (
+                <p>Error: {responseState.message}</p>)
+            }
 
         </div>
     </div>
