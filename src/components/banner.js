@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Banner = ({page}) =>{
     let aiButtonClass;
@@ -26,17 +26,15 @@ const Banner = ({page}) =>{
             quizButtonClass = 'Menu_button';
     }
 
-    const handleButtonClick = () => {
+    const navigate = useNavigate();
 
-    }
-    let navigate = useNavigate()
-
-    const handleLogout = (event) =>  {
-        if (localStorage.getItem('user') != null) {
-            localStorage.removeItem('user');     
+    const handleLogout = () =>  {
+        if (localStorage.getItem('user') !== null) {
+          localStorage.removeItem('user');
         }
-        navigate('/auth');
+        window.location.reload();
     }
+
     return(
         <div className="Menu">
             <div className="flex w-1/4 space-x-6 justify-center">
