@@ -1,5 +1,6 @@
 import "./Resource.css"
 import Banner from "../components/banner";
+import Modal from "../components/modal";
 import {useNavigate} from "react-router-dom";
 import React, {useState, useEffect} from 'react';
 import Search from "../search/Search";
@@ -22,8 +23,22 @@ function Resource() {
             console.log(error);
           });
       }, []);
-   
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    function handleBlogSubmit(event) {
+      event.preventDefault(); // prevent page refresh
+      const formData = new FormData(event.target);
+      console.log(formData.get('title'))
+    }
     return <>
     
     <Banner page="home"/>
@@ -51,6 +66,32 @@ function Resource() {
     <div className="flex space-x-6 justify-center">
         <Organization /><Organization /><Organization />
     </div>
+
+    <div>
+      <button onClick={handleOpenModal}>Open Modal</button>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <h1>Modal Content</h1>
+          <form onSubmit={handleBlogSubmit}>
+        <label>
+            Title
+            <input type="text" name="title" />
+        </label>
+
+        <label>
+            Information
+            <input type="text" name="information" />
+        </label>
+
+        <label>
+            Link
+            <input type="text" name="link" />
+        </label>
+        <input type="submit" value="Submit" />
+        </form>
+
+      </Modal>
+    </div>
+
     <div className="flex justify-center my-9">
         <div className="Divider_Tittle">Research</div>
             <div className="Divider">
