@@ -3,7 +3,6 @@ import {
   createBrowserRouter,
   RouterProvider,
   Navigate,
-  Outlet,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useContext } from "react";
@@ -17,10 +16,10 @@ function App() {
   const queryClient = new QueryClient();
 
 
-  const Layout = () => {
+  const Layout = ({children}) => {
     return (
       <QueryClientProvider client={queryClient}>
-        <Outlet/>
+        {children}
       </QueryClientProvider>
     );
   };
@@ -29,7 +28,7 @@ function App() {
     if (!currentUser) {
       return <Navigate to="/auth" />;
     }
-    console.log(children)
+  
     return children;
   };
 
@@ -38,17 +37,17 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
+      element: <Navigate to="/home" replace />,
+    },
+    {
+      path: "/home",
       element: (
         <ProtectedRoute>
-            <Layout />
+          <Layout>
+            <Resource />
+          </Layout>
         </ProtectedRoute>
       ),
-      children: [
-        {
-          path: "/home",
-          element: <Resource />,
-        },
-      ],
     },
     {
       path: "/auth",

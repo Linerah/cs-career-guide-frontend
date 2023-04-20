@@ -5,6 +5,10 @@ import {useNavigate} from "react-router-dom";
 import React, {useState, useEffect} from 'react';
 import Search from "../search/Search";
 import axios from "axios";
+import "swiper/css";
+import "swiper/css/pagination";
+import {Pagination} from "swiper"
+import { Swiper, SwiperSlide } from "swiper/react";
 function Resource() {
     const [blogs, setBlogs] = useState([]);
     const handleBlogValues = (blogValues) => {
@@ -51,12 +55,35 @@ function Resource() {
         </div>
         <Search onBlogs={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most read", "Most upvote"]}}/> 
     </div>
-    
-    <div className="flex space-x-6 justify-center">
-    {blogs.map((blog) => (
-            <Blog data={{title: blog.title , information: blog.information , link: blog.link}}/>
-        ))}
-    </div>
+
+    <Swiper
+        className={'flex justify-center'}
+        slidesPerView={3}
+        spaceBetween={20}
+        pagination={{
+          clickable: true,
+        }}
+
+        modules={[Pagination]}
+      >
+        {blogs.map((blog) => (
+            <SwiperSlide><Blog data={{title: blog.title, information: blog.information, link: blog.link}}/></SwiperSlide>
+                ))}
+      </Swiper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div className="flex justify-center my-9">
         <div className="Divider_Tittle">Organizations</div>
             <div className="Divider">

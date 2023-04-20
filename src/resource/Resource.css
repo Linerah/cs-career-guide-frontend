@@ -55,6 +55,19 @@ color: #14C38E;
 
 }
 
+.swiper-slide {
+    width: 407px !important;
+
+}
+.swiper {
+  width: 75% !important;
+  height: 25% !important;
+
+}
+.swiper-wrapper{
+    display: flex !important;
+    justify-content: left !important;
+}
 .Divider {
     width: 50%;
     height: 0px;
@@ -62,6 +75,7 @@ color: #14C38E;
     border: 1px solid #14C38E;
     margin-left: 2%;
     margin-top: 12px;
+
 }
 
 .Divider_Tittle {
@@ -80,6 +94,7 @@ color: #14C38E;
     height: 210px;
     background: #14C38E;
     border-radius: 15px;
+    display: flex;
 }
 .Blog_tittle {
     position: relative;
@@ -88,6 +103,7 @@ color: #14C38E;
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
+
     /* identical to box height, or 120% */
 
     text-align: center;
@@ -98,9 +114,22 @@ color: #14C38E;
     padding-top: 15px;
 }
 
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+
+}
+
+li {
+    margin-left: 1.5rem;
+}
+
 .Blog_container {
     display: flex;
     flex-direction: column;
+
 }
 
 .Blog_information {

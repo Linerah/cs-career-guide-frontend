@@ -3,8 +3,14 @@ import React, {useContext, useState, useEffect} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 import axios from "axios";
-
+import { Navigate } from "react-router-dom";
 function Auth() {
+    const { currentUser } = useContext(AuthContext);
+
+    if (currentUser) {
+        return <Navigate to="/home" replace />;
+    }
+    
     return <>
         <div className="w-100 h-screen">
             <div className="flex space-x-56 justify-center items-center">
