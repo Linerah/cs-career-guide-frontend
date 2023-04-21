@@ -1,14 +1,18 @@
 import "./Resource.css"
 import Banner from "../components/banner";
+import Modal from "../components/modal";
 import {useNavigate} from "react-router-dom";
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Search from "../search/Search";
 import axios from "axios";
 import "swiper/css";
 import "swiper/css/pagination";
 import {Pagination} from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react";
+import {AuthContext} from "../auth/AuthContext";
 function Resource() {
+
+    const {currentUser} = useContext((AuthContext))
     const [blogs, setBlogs] = useState([]);
     const handleBlogValues = (blogValues) => {
         console.log('Im heree')
@@ -26,12 +30,31 @@ function Resource() {
             console.log(error);
           });
       }, []);
-   
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    async function handleBlogSubmit(event) {
+        let inputs = {}
+        event.preventDefault(); // prevent page refresh
+        const formData = new FormData(event.target);
+        for (const [key, value] of formData.entries()) {
+            inputs[key] = [value];
+        }
+        inputs['user_id'] = currentUser._id
+        await axios.post("https://cscg-blog-search-service.herokuapp.com/create_blog", inputs);
+        setIsModalOpen(false);
+    }
     return <>
     
     <Banner page="home"/>
-
     <div className="flex justify-center my-9">
         
         <div className="Divider_Tittle"> Blogs </div>
@@ -40,34 +63,54 @@ function Resource() {
         </div>
         <Search onBlogs={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most read", "Most upvote"]}}/> 
     </div>
-
+<div className={isModalOpen ? "opacity-70 flex relative" : "opacity-100 flex relative"}>
     <Swiper
-        className={'flex justify-center'}
+        className={'flex justify-center '}
         slidesPerView={3}
         spaceBetween={20}
-        pagination={{
-          clickable: true,
-        }}
-
         modules={[Pagination]}
       >
         {blogs.map((blog) => (
-            <SwiperSlide><Blog data={{title: blog.title, information: blog.information, link: blog.link}}/></SwiperSlide>
+            <SwiperSlide ><Blog data={{title: blog.title, information: blog.information, link: blog.link}}/></SwiperSlide>
                 ))}
       </Swiper>
+          <button className="absolute right-32 top-50 ml-auto bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+        </svg></button>
+</div>
+    <div>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <h1 className="text-colegio-background font-sans font-bold text-xl m-2 text-center">Share a new Blog!</h1>
+          <form onSubmit={handleBlogSubmit}>
+              <div className="">
 
+                      <div className="relative z-0 w-full mb-6 group">
+                      <input type="text" name="title" id="title"
+                             className="font-sans font-bold block py-2.5 px-0 w-full text-lg text-colegio-background bg-transparent border-0 border-b-2 border-colegio-background appearance-none focus:outline-none focus:ring-0 focus:border-colegio-green-2  peer"
+                             placeholder=" " required/>
+                      <label htmlFor="title"
+                             className="font-sans font-bold peer-focus:font-medium absolute text-xl text-colegio-background duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-colegio-green-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Title</label>
+                  </div>
+                      <div className="relative z-0 w-full mb-6 group">
+                      <input type="text" name="information" id="information"
+                             className="font-sans font-bold block py-2.5 px-0 w-full text-lg text-colegio-background bg-transparent border-0 border-b-2 border-colegio-background appearance-none focus:outline-none focus:ring-0 focus:border-colegio-green-2  peer"
+                             placeholder=" " required/>
+                      <label htmlFor="information"
+                             className="font-sans font-bold peer-focus:font-medium absolute text-xl text-colegio-background duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-colegio-green-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Information</label>
+                  </div>
+                                        <div className="relative z-0 w-full mb-6 group">
+                      <input type="text" name="link" id="link"
+                             className="font-sans font-bold block py-2.5 px-0 w-full text-lg text-colegio-background bg-transparent border-0 border-b-2 border-colegio-background appearance-none focus:outline-none focus:ring-0 focus:border-colegio-green-2  peer"
+                             placeholder=" " required/>
+                      <label htmlFor="link"
+                             className="font-sans font-bold peer-focus:font-medium absolute text-xl text-colegio-background duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-colegio-green-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Link</label>
+                  </div>
 
-
-
-
-
-
-
-
-
-
-
-
+                  <button className="bg-colegio-green-2 text-colegio-dark-green font-sans font-bold rounded-lg p-2 float-right" type="submit" value="Submit" > Submit </button>
+              </div>
+        </form>
+      </Modal>
+</div>
 
     <div className="flex justify-center my-9">
         <div className="Divider_Tittle">Organizations</div>
@@ -78,6 +121,7 @@ function Resource() {
     <div className="flex space-x-6 justify-center">
         <Organization /><Organization /><Organization />
     </div>
+
     <div className="flex justify-center my-9">
         <div className="Divider_Tittle">Research</div>
             <div className="Divider">
