@@ -69,7 +69,7 @@ color: #14C38E;
     justify-content: left !important;
 }
 .Divider {
-    width: 50%;
+    width: 55%;
     height: 0px;
 
     border: 1px solid #14C38E;
@@ -96,6 +96,7 @@ color: #14C38E;
     border-radius: 15px;
     display: flex;
 }
+
 
 .Blog_add_button_container {
     height: 210px;
@@ -138,7 +139,6 @@ li {
 
 .Blog_information {
     position: relative;
-
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 700;
