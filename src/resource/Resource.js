@@ -13,6 +13,7 @@ import {AuthContext} from "../auth/AuthContext";
 function Resource() {
 
     const {currentUser} = useContext((AuthContext))
+    console.log(currentUser)
     const [blogs, setBlogs] = useState([]);
     const handleBlogValues = (blogValues) => {
         console.log('Im heree')
@@ -71,12 +72,18 @@ function Resource() {
         modules={[Pagination]}
       >
         {blogs.map((blog) => (
-            <SwiperSlide ><Blog data={{title: blog.title, information: blog.information, link: blog.link}}/></SwiperSlide>
+
+            currentUser.isProfessor ?
+                (currentUser._id === blog.user_info[0]._id ?
+               <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link}}/></SwiperSlide> :
+               null) :
+                <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link}}/> </SwiperSlide>
                 ))}
       </Swiper>
-          <button className="absolute right-32 top-50 ml-auto bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        {currentUser.isProfessor && <button className="absolute right-32 top-1/2 ml-auto bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
-        </svg></button>
+        </svg></button>}
+
 </div>
     <div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
@@ -147,10 +154,10 @@ function Blog(props) {
             <div className="Blog_container w-1/2 overflow-hidden">
                 <h1 className="Blog_tittle">{props.data.title}
                 </h1>
-                <h2 className="Blog_information">{props.data.information}</h2>
+                <h2 className="Blog_information">{props.data.information} {console.log(props.data)}</h2>
                 <div className="Blog_button_container">
                     <button className="Blog_button rounded-lg font-bold" onClick={handleButtonClick}>
-                        Read 
+                        Read
                     </button>
                 </div>
             </div>
