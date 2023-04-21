@@ -72,7 +72,12 @@ function Resource() {
         modules={[Pagination]}
       >
         {blogs.map((blog) => (
-            <SwiperSlide ><Blog data={{title: blog.title, information: blog.information, link: blog.link}}/></SwiperSlide>
+
+            currentUser.isProfessor ?
+                (currentUser._id === blog.user_info[0]._id ?
+               <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link}}/></SwiperSlide> :
+               null) :
+                <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link}}/> </SwiperSlide>
                 ))}
       </Swiper>
         {currentUser.isProfessor && <button className="absolute right-32 top-1/2 ml-auto bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
