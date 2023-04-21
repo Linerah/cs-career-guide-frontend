@@ -27,9 +27,11 @@ const Quiz = () => {
       setShowResult(true)
 
       e.preventDefault();
+      answers['Summary'] = '.'
       results.answers = answers
       try {
         console.log(results)
+
         let test
         test = await axios.post('https://cs-career-guide-ai-service.herokuapp.com/quizAI', results).then((response) => {
           setResponseState({
