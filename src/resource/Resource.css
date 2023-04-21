@@ -96,6 +96,10 @@ color: #14C38E;
     border-radius: 15px;
     display: flex;
 }
+
+.Blog_add_button_container {
+    height: 210px;
+}
 .Blog_tittle {
     position: relative;
     font-family: 'DM Sans';

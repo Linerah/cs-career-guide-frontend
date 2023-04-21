@@ -80,9 +80,9 @@ function Resource() {
                 <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link}}/> </SwiperSlide>
                 ))}
       </Swiper>
-        {currentUser.isProfessor && <button className="absolute right-32 top-1/2 ml-auto bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        {currentUser.isProfessor && <div className="flex justify-center Blog_add_button_container"><button className="m-auto mr-24 bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
-        </svg></button>}
+        </svg></button> </div>}
 
 </div>
     <div>
