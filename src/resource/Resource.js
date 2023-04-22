@@ -23,7 +23,7 @@ function Resource() {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:5000/blogs', {
+        axios.get('https://cscg-blog-search-service.herokuapp.com/blogs', {
             params: {
               "user_id": currentUser._id
             }
@@ -67,7 +67,7 @@ function Resource() {
             <div className="Divider">
             
         </div>
-        <Search onBlogs={handleBlogValues} data={{route: "http://localhost:5000/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most read", "Most upvote"]}}/> 
+        <Search onBlogs={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most read", "Most upvote"]}}/> 
     </div>
 <div className={isModalOpen ? "opacity-70 flex relative" : "opacity-100 flex relative"}>
     <Swiper
