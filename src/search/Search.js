@@ -1,9 +1,13 @@
 import "./Search.css"
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import axios from "axios";
+import {AuthContext} from "../auth/AuthContext";
 function Search(props) {
+    
+    const {currentUser} = useContext((AuthContext))
     const [text, setText] = useState('');
     const [category, setCategory] = useState('');
+    
 
     const handleChangeText = (event) => {
         const value = event.target.value;
@@ -21,7 +25,7 @@ function Search(props) {
         e.preventDefault();
 
         try {
-            const response = await axios.post(props.data.route, {"blog-filter": category, "blog-title": text});
+            const response = await axios.post(props.data.route, {"blog-filter": category, "blog-title": text, "user_id": currentUser._id});
             props.onBlogs(response.data);
 
         } catch (err) {

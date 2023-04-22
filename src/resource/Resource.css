@@ -160,7 +160,8 @@ li {
     background-color: #00FFAB;
     color: #1A6A52;
     margin: 0;
-    padding: 5px 50px;
+    padding: 5px 0;
+    width: 50%;
 }
 
 .Blog_button_container {
