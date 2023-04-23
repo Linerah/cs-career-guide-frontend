@@ -68,7 +68,7 @@ function Resource() {
             <div className="Divider">
             
         </div>
-        <Search onBlogs={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most read", "Most upvote"]}}/> 
+        <Search onBlogs={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most upvote"]}}/> 
     </div>
 <div className={isModalOpen ? "opacity-70 flex relative" : "opacity-100 flex relative"}>
     <Swiper
