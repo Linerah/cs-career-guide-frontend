@@ -81,9 +81,9 @@ function Resource() {
 
             currentUser.isProfessor ?
                 (currentUser._id === blog.user_info[0]._id ?
-               <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link, blog_id: blog.blog_id, upvote: blog.upvote}}/></SwiperSlide> :
+               <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link, blog_id: blog.blog_id, upvote: blog.upvote, name: blog.user_info[0].name}}/></SwiperSlide> :
                null) :
-                <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link, blog_id: blog.blog_id, upvote: blog.upvote}}/> </SwiperSlide>
+                <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link, blog_id: blog.blog_id, upvote: blog.upvote, name: blog.user_info[0].name}}/> </SwiperSlide>
                 ))}
       </Swiper>
         {currentUser.isProfessor && <div className="flex justify-center Blog_add_button_container"><button className="m-auto mr-24 bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

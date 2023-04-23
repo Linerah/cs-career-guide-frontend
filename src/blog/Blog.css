@@ -7,9 +7,19 @@
     display: flex;
 }
 
+.Blog_info_container{
+    height: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 .Blog_add_button_container {
     height: 210px;
+}
+.Blog_professor_container {
+    height: 35%;
 }
 .Blog_tittle {
     position: relative;
@@ -25,13 +35,13 @@
     letter-spacing: 0.5px;
 
     color: #F2F0EB;
-    height: 25%;
-    padding-top: 15px;
+    height: 30%;
 }
 
 .Blog_container {
     display: flex;
     flex-direction: column;
+    margin: 0.5rem;
 
 }
 
@@ -48,8 +58,8 @@
     letter-spacing: 0.5px;
 
     color: #A2FFE0;
-    height: 50%;
     padding: 0px 5px;
+    height: 70%;
 
 
 }
@@ -63,7 +73,7 @@
 }
 
 .Blog_button_container {
-    height: 25%;
+    height: 35%;
     display: flex;
     justify-content: center;
     align-items: center;

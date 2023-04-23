@@ -11,9 +11,21 @@ function Blog(props) {
         
             <img className=" w-1/2" src="mchine.jpg" alt="logo"></img>
             <div className="Blog_container w-1/2 overflow-hidden">
-                <h1 className="Blog_tittle">{props.data.title}
-                </h1>
-                <h2 className="Blog_information">{props.data.information} {console.log(props.data)}</h2>
+                <div className="Blog_professor_container flex w-100 justify-center items-center">
+                    <div className="profile_gradient mr-auto rounded-full p-0.5 flex justify-center items-center">
+                        <div className="rounded-full p-0.2 bg-white flex justify-center items-center">
+                            <img className="h-10" src={`https://api.dicebear.com/5.x/adventurer/svg?seed=${props.data.name}`} alt="profile"/>
+                        </div>
+                    </div>
+                    <h1 className="Blog_information flex items-center">
+                        Prof. {props.data.name}
+                    </h1>
+                </div>
+                <div className="Blog_info_container ">
+                    <h1 className="Blog_tittle">{props.data.title}
+                    </h1>
+                    <h2 className="Blog_information">{props.data.information}</h2>
+                </div>    
                 <div className="Blog_button_container space-x-3">
                     <Upvote  key={`${props.data.blog_id}_${props.data.upvote}`} data={{blog_id: props.data.blog_id, upvote: props.data.upvote}}/>
                     <button className="Blog_button rounded-lg font-bold" onClick={handleButtonClick}>
