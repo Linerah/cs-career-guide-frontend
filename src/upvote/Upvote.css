@@ -1,0 +1,34 @@
+.clicked {
+    /* m-4 relative float-right bg-colegio-light-green hover:bg-colegio-green-2 text-colegio-dark-green text-base font-sans font-bold rounded-lg w-24 h-10 disabled:opacity-25 */
+    position: relative;
+    float: right;
+    background-color: #00FFAB;
+    color: #1A6A52;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    padding: 1.5px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0px;
+    width: 35%;
+}
+
+.clicked:hover {
+    background-color: #A2FFE0;
+
+}
+.unclicked {
+    opacity: 25%;
+    position: relative;
+    float: right;
+    background-color: #00FFAB;
+    color: #1A6A52;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0px;
+    width: 35%;
+}

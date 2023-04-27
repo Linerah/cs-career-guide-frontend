@@ -10,6 +10,8 @@ import "swiper/css/pagination";
 import {Pagination} from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react";
 import {AuthContext} from "../auth/AuthContext";
+import Blog from "../blog/Blog"
+
 function Resource() {
 
     const {currentUser} = useContext((AuthContext))
@@ -22,7 +24,11 @@ function Resource() {
     };
 
     useEffect(() => {
-        axios.get('https://cscg-blog-search-service.herokuapp.com/blogs')
+        axios.get('https://cscg-blog-search-service.herokuapp.com/blogs', {
+            params: {
+              "user_id": currentUser._id
+            }
+          })
           .then(response => {
             console.log(response.data)
             setBlogs(response.data);
@@ -62,7 +68,7 @@ function Resource() {
             <div className="Divider">
             
         </div>
-        <Search onBlogs={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most read", "Most upvote"]}}/> 
+        <Search onBlogs={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most upvote"]}}/> 
     </div>
 <div className={isModalOpen ? "opacity-70 flex relative" : "opacity-100 flex relative"}>
     <Swiper
@@ -75,14 +81,14 @@ function Resource() {
 
             currentUser.isProfessor ?
                 (currentUser._id === blog.user_info[0]._id ?
-               <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link}}/></SwiperSlide> :
+               <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link, blog_id: blog.blog_id, upvote: blog.upvote, name: blog.user_info[0].name}}/></SwiperSlide> :
                null) :
-                <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link}}/> </SwiperSlide>
+                <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link, blog_id: blog.blog_id, upvote: blog.upvote, name: blog.user_info[0].name}}/> </SwiperSlide>
                 ))}
       </Swiper>
-        {currentUser.isProfessor && <button className="absolute right-32 top-1/2 ml-auto bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        {currentUser.isProfessor && <div className="flex justify-center Blog_add_button_container"><button className="m-auto mr-24 bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
-        </svg></button>}
+        </svg></button> </div>}
 
 </div>
     <div>
@@ -142,27 +148,6 @@ function Resource() {
 }
 export default Resource;
 
-function Blog(props) {
-
-    const handleButtonClick = () => {
-        window.open("https://" + props.data.link, '_blank');
-      };
-
-    return <div className="Blog flex overflow-hidden justify-center">
-        
-            <img className=" w-1/2" src="mchine.jpg" alt="logo"></img>
-            <div className="Blog_container w-1/2 overflow-hidden">
-                <h1 className="Blog_tittle">{props.data.title}
-                </h1>
-                <h2 className="Blog_information">{props.data.information} {console.log(props.data)}</h2>
-                <div className="Blog_button_container">
-                    <button className="Blog_button rounded-lg font-bold" onClick={handleButtonClick}>
-                        Read
-                    </button>
-                </div>
-            </div>
-        </div>
-}
 
 function Organization(){
     return <div className="Organization flex overflow-hidden justify-center">

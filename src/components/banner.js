@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import React, { useContext} from 'react';
+import {AuthContext} from "../auth/AuthContext";
 
 const Banner = ({page}) =>{
+    
+    const {currentUser} = useContext((AuthContext))
     let aiButtonClass;
     let resourcesButtonClass
     let quizButtonClass;
@@ -57,7 +61,7 @@ const Banner = ({page}) =>{
             <div className="flex w-1/4 space-x-6 justify-center items-center">
                 <div className="profile_gradient rounded-full p-0.5 flex justify-center items-center">
                     <div className="rounded-full p-1 bg-white flex justify-center items-center">
-                        <img className="h-10" src="https://api.dicebear.com/5.x/adventurer/svg?seed=KevinL" alt="profile"/>
+                        <img className="h-10" src={`https://api.dicebear.com/5.x/adventurer/svg?seed=${currentUser.name}`} alt="profile"/>
                     </div>
                 </div>
                 <div className="Menu_button" onClick={handleLogout}>

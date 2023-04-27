@@ -1,0 +1,81 @@
+.Blog {
+    position: relative;
+    width: 407px;
+    height: 210px;
+    background: #14C38E;
+    border-radius: 15px;
+    display: flex;
+}
+
+.Blog_info_container{
+    height: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Blog_add_button_container {
+    height: 210px;
+}
+.Blog_professor_container {
+    height: 35%;
+}
+.Blog_tittle {
+    position: relative;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+
+    /* identical to box height, or 120% */
+
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #F2F0EB;
+    height: 30%;
+}
+
+.Blog_container {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
+
+}
+
+.Blog_information {
+    position: relative;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    /* or 240% */
+
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #A2FFE0;
+    padding: 0px 5px;
+    height: 70%;
+
+
+}
+
+.Blog_button{
+    background-color: #00FFAB;
+    color: #1A6A52;
+    margin: 0;
+    padding: 5px 0;
+    width: 50%;
+}
+
+.Blog_button_container {
+    height: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

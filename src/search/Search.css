@@ -5,3 +5,23 @@
     margin: 0;
     padding: 3px 20px;
 }
+
+.Text_Search {
+    background-color: #F2F0EB;
+}
+
+.Dropdown_Search {
+    background-color: #F2F0EB;
+}
+
+.Text_Search:focus {
+    outline: none;
+}
+
+.Dropdown_Search:focus {
+    outline: none;
+}
+
+::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
