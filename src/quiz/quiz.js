@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import Banner from "../components/banner";
 import quizQuestions from "./quizQuestions";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {AuthContext} from "../auth/AuthContext";
 
 const Quiz = () => {
   const [activeQuestion, setActiveQuestion] = useState(0)
   const [showResult, setShowResult] = useState(false)
+  const [profShowResult, setProfShowResult] = useState(false)
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null)
   const [answers] = useState({})
   const [results] = useState({'answers': ''})
@@ -17,12 +19,21 @@ const Quiz = () => {
     success: null,
     message: '',
   });
+  const {currentUser} = useContext((AuthContext))
+
+  const profChoices = ['Programming Languages', 'Data Structures and Algorithms', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human Computer Interaction', 'Artificial Intelligence']
+
   const onClickNext = async (e) => {
     setSelectedAnswerIndex(null)
 
     if (activeQuestion !== questions.length - 1) {
       setActiveQuestion((prev) => prev + 1)
-    } else {
+    } else if (currentUser.isProfessor){
+      console.log('WORKS')
+      setActiveQuestion(0)
+      setShowResult(true)
+    }
+    else {
       setActiveQuestion(0)
       setShowResult(true)
 
@@ -33,7 +44,7 @@ const Quiz = () => {
         console.log(results)
 
         let test
-        test = await axios.post('https://cs-career-guide-ai-service.herokuapp.com/quizAI', results).then((response) => {
+        test = await axios.post('https://cs-career-guide-ai-service.herokuapp.com/quizAI', {results, currentUser}).then((response) => {
           setResponseState({
           success: response.status,
           message: response.data.result,
@@ -54,25 +65,26 @@ const Quiz = () => {
     let current = activeQuestion + 1
     answers['Answer_' + current] = answer
 
-    // Method used before for saving answer as multidimensional array
+  }
+  const onFieldSelected = async (answer, index) => {
+    setProfShowResult(true)
+    console.log(answers)
 
-    // let temp = []
-    // for(let i = 0; i < choices.length; i++){
-    //   if (i === index){
-    //       temp.push(1)
-    //   }
-    //   else{
-    //       temp.push(0)
-    //   }
-    //
-    // }
-    // results[activeQuestion] = temp
+    answers['Summary'] = Object.values(answers).join(" ");
+
+    console.log(answers['Summary'])
+
+    answers['Result'] = answer
+    results.answers = answers
+    console.log(results)
+    await axios.post('https://cs-career-guide-frontend.herokuapp.com/quizAI', {results, currentUser})
 
   }
-        console.log(responseState.success)
-        console.log(responseState.message)
 
   const addLeadingZero = (number) => (number > 9 ? number : `0${number}`)
+  function handleHomeRedirect () {
+    navigate('/home')
+  }
 
   return <>
     <Banner page = "quiz" />
@@ -112,7 +124,36 @@ const Quiz = () => {
               {activeQuestion === questions.length - 1 ? 'Finish' : 'Next'}
             </button>
         </div>
-      ) : responseState.success == null ? (
+      ) : currentUser.isProfessor && showResult && !profShowResult ? (
+                <div>
+                <div className="border-b-2  m-8 border-colegio-light-green">
+                      <div className="text-colegio-background font-sans font-bold text-xl m-2 text-center">CS Career Guide AI Quiz</div>
+                  </div>
+                    <p className="text-colegio-background font-sans font-bold text-lg m-2 text-center">Which of these do you consider your specialty?</p>
+            <div className="grid place-content-center align-center justify-center grid-cols-3">
+                {profChoices.map((answer, index) => (
+                    <span className="grid place-content-center justify-self-center  align-bottom w-64 h-20 text-center bg-colegio-light-green  hover:bg-colegio-light-green text-colegio-dark-green text-base font-sans font-bold rounded-2xl border-4 m-4 border-colegio-green"
+                        onClick={() => onFieldSelected(answer, index)}
+                        key={answer}
+                        className={
+                            selectedAnswerIndex === index ? 'grid place-content-center justify-self-center  w-64 h-20 text-center bg-colegio-green-2 text-colegio-dark-green text-base font-sans font-bold rounded-2xl border-4 m-4 border-colegio-green-2' :
+                                "grid place-content-center justify-self-center  w-64 h-20 text-center  bg-colegio-light-green  hover:bg-colegio-green-2 text-colegio-dark-green text-base font-sans font-bold rounded-2xl border-4 m-4 border-colegio-green"
+                        }>
+                        <p>{answer}</p>
+                    </span>
+                ))}
+            </div>
+                  </div>
+                ): profShowResult ?(
+    <div>
+                <div className="border-b-2  m-8 border-colegio-light-green">
+                      <div className="text-colegio-background font-sans font-bold text-xl m-2 text-center">CS Career Guide AI Quiz</div>
+                  </div>
+                    <p className="text-colegio-background font-sans font-bold text-lg m-2 text-center">Thank you for taking the quiz!</p>
+                    <p className="text-colegio-background font-sans font-bold text-lg m-2 text-center"> The AI will consider your answer when making predictions, thank you for your collaboration</p>
+                                <button className=" m-4 relative float-right  bg-colegio-light-green hover:bg-colegio-green-2 text-colegio-dark-green text-base font-sans font-bold rounded-lg w-32 h-16 disabled:opacity-25" onClick={handleHomeRedirect}> Return Home</button>
+    </div>
+            ): responseState.success == null ? (
               <div>
                   <div className="border-b-2  m-8 border-colegio-light-green">
                       <div className="text-colegio-background font-sans font-bold text-xl m-2 text-center">CS Career Guide AI Quiz</div>
