@@ -22,10 +22,10 @@ function Blog(props) {
                     </h1>
                 </div>
                 <div className="Blog_info_container ">
-                    <h1 className="Blog_tittle">{props.data.title}
-                    </h1>
-                    <h2 className="Blog_information">{props.data.information}</h2>
-                </div>    
+                    <div><h1 className="Blog_tittle">{props.data.title}
+                    </h1></div>
+                    <div><h2 className="Blog_information">{props.data.information}</h2></div>
+                </div>
                 <div className="Blog_button_container space-x-3">
                     <Upvote  key={`${props.data.blog_id}_${props.data.upvote}`} data={{blog_id: props.data.blog_id, upvote: props.data.upvote}}/>
                     <button className="Blog_button rounded-lg font-bold" onClick={handleButtonClick}>
