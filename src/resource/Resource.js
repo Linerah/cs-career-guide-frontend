@@ -71,7 +71,7 @@ function Resource() {
         <Search onBlogs={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most upvote", 'Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']}}/>
     </div>
 <div className={isModalOpen ? "opacity-70 flex relative justify-center" : "opacity-100 flex relative justify-center"}>
-    {console.log(blogs)}<div className="w-1/6"></div> <Swiper
+    {console.log(blogs)}<Swiper
         className={'flex justify-center '}
         slidesPerView={3}
         spaceBetween={20}
@@ -90,7 +90,7 @@ function Resource() {
         {currentUser.isProfessor && <button className="m-auto absolute top-24 right-20 bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
         </svg></button>}
-   <div className="w-1/6"> </div>
+
 </div>
     <div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
