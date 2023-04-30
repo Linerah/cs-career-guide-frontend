@@ -42,9 +42,6 @@ const Banner = ({page}) =>{
     return(
         <div className="Menu">
             <div className="flex w-1/4 space-x-6 justify-center">
-                <div className= {aiButtonClass}>
-                    AI
-                </div>
                 <div className= {resourcesButtonClass} onClick={() => navigate('/home')}>
                     Resources
                 </div>
