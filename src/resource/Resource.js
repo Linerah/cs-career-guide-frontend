@@ -70,8 +70,8 @@ function Resource() {
         </div>
         <Search onBlogs={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most upvote", 'Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']}}/>
     </div>
-<div className={isModalOpen ? "opacity-70 flex relative justify-center" : "opacity-100 flex relative justify-center"}>
-    {console.log(blogs)}<Swiper
+<div className={isModalOpen ? "opacity-70 flex relative justify-center blog_height" : "opacity-100 flex relative justify-center blog_height"}>
+    <Swiper
         className={'flex justify-center'}
         slidesPerView={'auto'}
         spaceBetween={0}
@@ -136,7 +136,7 @@ function Resource() {
         </div>
         <Search  data={{route: "",resource: "orgs", options: ["","Newest", "Oldest", "Most upvote"]}}/> 
     </div>
-    <div className="flex space-x-6 justify-center">
+ <div className={isModalOpen ? "opacity-70 flex relative justify-center research_height" : "opacity-100 flex relative justify-center research_height"}>
         <Swiper
         className={'flex justify-center '}
         slidesPerView={'auto'}
@@ -155,7 +155,6 @@ function Resource() {
             <SwiperSlide><Organization /></SwiperSlide>
 
       </Swiper>
-
     </div>
 
     <div className="flex justify-center divider_container">
@@ -164,7 +163,7 @@ function Resource() {
         </div>
         <Search  data={{route: "",resource: "research", options: ["","Newest", "Oldest"]}}/> 
     </div>
-    <div className="flex space-x-6 justify-center">
+<div className={isModalOpen ? "opacity-70 flex relative justify-center research_height" : "opacity-100 flex relative justify-center research_height"}>
         <Swiper
         className={'flex justify-center '}
         slidesPerView={'auto'}

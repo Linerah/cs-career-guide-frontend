@@ -5,7 +5,7 @@ import './Blog.css'
 function Blog(props) {
 
     const handleButtonClick = () => {
-        window.open("https://" + props.data.link, '_blank');
+        window.open(props.data.link, '_blank');
       };
 
     return <div className="Blog flex overflow-hidden justify-center">
