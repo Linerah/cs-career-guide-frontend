@@ -44,7 +44,7 @@ const Quiz = () => {
         console.log(results)
 
         let test
-        test = await axios.post('https://cs-career-guide-frontend.herokuapp.com/quizAI', {results, currentUser}).then((response) => {
+        test = await axios.post('https://cs-career-guide-ai-service.herokuapp.com/quizAI', {results, currentUser}).then((response) => {
           setResponseState({
           success: response.status,
           message: response.data.result,
