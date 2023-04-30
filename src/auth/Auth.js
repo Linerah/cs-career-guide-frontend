@@ -78,6 +78,7 @@ function Register(){
     let navigate = useNavigate(); 
     const [err, setErr] = useState(null);
 
+    const {login}  = useContext(AuthContext);
 
     const handleChange = (e) => {
         console.log(inputs)
@@ -90,7 +91,8 @@ function Register(){
 
         try {
             await axios.post("https://cs-career-guide-auth-service.herokuapp.com/register", inputs);
-            let path = "/auth";
+            await login(inputs)
+            let path = "/home";
             navigate(path);
 
         } catch (err) {
