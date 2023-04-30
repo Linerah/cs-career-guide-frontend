@@ -64,12 +64,12 @@ color: #14C38E;
 }
 
 .swiper-slide {
-    width: 32% !important;
+    width: 450px !important;
     padding: 2% 0%;
 
 }
 .swiper {
-  width: 68% !important;
+  width: 100% !important;
   height: 25% !important;
 
 
