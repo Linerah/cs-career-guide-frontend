@@ -62,7 +62,8 @@ function Resource() {
     return <>
     
     <Banner page="home"/>
-    <div className="flex justify-center my-9">
+        <div className={'main'}>
+    <div className="flex justify-center divider_container">
         
         <div className="Divider_Tittle"> Blogs </div>
             <div className="Divider">
@@ -72,7 +73,7 @@ function Resource() {
     </div>
 <div className={isModalOpen ? "opacity-70 flex relative justify-center" : "opacity-100 flex relative justify-center"}>
     {console.log(blogs)}<div className="w-1/6"></div> <Swiper
-        className={'flex justify-center '}
+        className={'flex justify-center my-9'}
         slidesPerView={3}
         spaceBetween={20}
         modules={[Pagination]}
@@ -126,13 +127,13 @@ function Resource() {
       </Modal>
 </div>
 
-    <div className="flex justify-center my-9">
+    <div className="flex justify-center divider_container">
         <div className="Divider_Tittle">Organizations</div>
             <div className="Divider">
         </div>
         <Search  data={{route: "",resource: "orgs", options: ["","Newest", "Oldest", "Most upvote"]}}/> 
     </div>
-    <div className="flex space-x-6 justify-center">
+    <div className="flex space-x-6 justify-center my-9">
         <Swiper
         className={'flex justify-center '}
         slidesPerView={3}
@@ -148,13 +149,13 @@ function Resource() {
 
     </div>
 
-    <div className="flex justify-center my-9">
+    <div className="flex justify-center divider_container">
         <div className="Divider_Tittle">Research</div>
             <div className="Divider">
         </div>
         <Search  data={{route: "",resource: "research", options: ["","Newest", "Oldest"]}}/> 
     </div>
-    <div className="flex space-x-6 justify-center">
+    <div className="flex space-x-6 justify-center my-9">
         <Swiper
         className={'flex justify-center '}
         slidesPerView={3}
@@ -168,6 +169,7 @@ function Resource() {
 
       </Swiper>
     </div>
+            </div>
     </>
 }
 export default Resource;

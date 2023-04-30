@@ -1,7 +1,7 @@
 .Blog {
     position: relative;
     width: 407px;
-    height: 210px;
+    height: 50%;
     background: #14C38E;
     border-radius: 15px;
     display: flex;
