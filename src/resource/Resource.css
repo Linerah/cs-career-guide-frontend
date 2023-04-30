@@ -64,13 +64,16 @@ color: #14C38E;
 }
 
 .swiper-slide {
-    width: 32% !important;
+    width: 450px !important;
     padding: 2% 0%;
 
+
 }
+
 .swiper {
-  width: 68% !important;
+  width: 65% !important;
   height: 25% !important;
+    autoHeight: true !important;
 
 
 }
@@ -78,7 +81,16 @@ color: #14C38E;
     display: flex !important;
     justify-content: left !important;
 }
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fff;
+  font-size: 20px;
+}
 
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #000;
+}
 .Divider {
     width: 55%;
     height: 0px;
