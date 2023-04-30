@@ -68,10 +68,10 @@ function Resource() {
             <div className="Divider">
             
         </div>
-        <Search onBlogs={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most upvote"]}}/> 
+        <Search onBlogs={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most upvote", 'Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']}}/>
     </div>
-<div className={isModalOpen ? "opacity-70 flex relative" : "opacity-100 flex relative"}>
-    <Swiper
+<div className={isModalOpen ? "opacity-70 flex relative justify-center" : "opacity-100 flex relative justify-center"}>
+    {console.log(blogs)}<div className="w-1/6"></div> <Swiper
         className={'flex justify-center '}
         slidesPerView={3}
         spaceBetween={20}
@@ -81,15 +81,16 @@ function Resource() {
 
             currentUser.isProfessor ?
                 (currentUser._id === blog.user_info[0]._id ?
-               <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link, blog_id: blog.blog_id, upvote: blog.upvote, name: blog.user_info[0].name}}/></SwiperSlide> :
+               <SwiperSlide > <Blog data={{title: blog.title, information: blog.information, link: blog.link, blog_id: blog.blog_id, upvote: blog.upvote, tag: blog.tag, name: blog.user_info[0].name}}/></SwiperSlide> :
                null) :
-                <SwiperSlide >  <Blog data={{title: blog.title, information: blog.information, link: blog.link, blog_id: blog.blog_id, upvote: blog.upvote, name: blog.user_info[0].name}}/> </SwiperSlide>
+                <SwiperSlide > <Blog data={{title: blog.title, information: blog.information, link: blog.link, blog_id: blog.blog_id, upvote: blog.upvote,tag: blog.tag, name: blog.user_info[0].name, }}/> </SwiperSlide>
                 ))}
       </Swiper>
-        {currentUser.isProfessor && <div className="flex justify-center Blog_add_button_container"><button className="m-auto mr-24 bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
-        </svg></button> </div>}
 
+        {currentUser.isProfessor && <button className="m-auto absolute top-24 right-20 bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+        </svg></button>}
+   <div className="w-1/6"> </div>
 </div>
     <div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
