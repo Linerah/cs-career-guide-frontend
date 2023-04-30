@@ -44,7 +44,7 @@ const Quiz = () => {
         console.log(results)
 
         let test
-        test = await axios.post('https://cs-career-guide-ai-service.herokuapp.com/quizAI', {results, currentUser}).then((response) => {
+        test = await axios.post('https://cs-career-guide-frontend.herokuapp.com/quizAI', {results, currentUser}).then((response) => {
           setResponseState({
           success: response.status,
           message: response.data.result,
@@ -89,22 +89,22 @@ const Quiz = () => {
   return <>
     <Banner page = "quiz" />
     <div className="bg-colegio-background flex justify-center ">
-        <div className="m-16 h-fit bg-colegio-green rounded-md w-5/12 h-max">
+        <div className="lg:m-16 m-6 lg:w-5/12 w-11/12 h-fit bg-colegio-green rounded-md  h-max">
             {!showResult ? (
         <div>
 
             <div className="border-b-2 m-8 border-colegio-light-green">
-              <div className="text-colegio-background font-sans font-bold text-2xl m-2 text-center">CS Career Guide AI Quiz</div>
+              <div className="text-colegio-background font-sans font-bold md:text-2xl m-2 text-center text-lg">CS Career Guide AI Quiz</div>
                 <div className="grid m-2 place-content-end">
-                    <span className="text-colegio-green-2 font-sans font-bold text-lg">
+                    <span className="text-colegio-green-2 font-sans font-bold md:text-lg text-md ">
                         {addLeadingZero(activeQuestion + 1)}/{addLeadingZero(questions.length)}
                     </span>
                 </div>
             </div>
 
-            <h2 className="text-colegio-background font-sans font-bold text-2xl m-2 pb-4 text-center">{question}</h2>
+            <h2 className="text-colegio-background font-sans font-bold md:text-2xl text-lg m-2 pb-4 text-center">{question}</h2>
 
-            <div className="grid place-content-center align-center justify-center grid-cols-2">
+            <div className="grid place-content-center align-center justify-center md:grid-cols-2">
                 {choices.map((answer, index) => (
                     <span className="grid place-content-center justify-self-center  align-bottom w-64 h-20 text-center bg-colegio-light-green  hover:bg-colegio-light-green text-colegio-dark-green text-base font-sans font-bold rounded-2xl border-4 m-4 border-colegio-green"
                         onClick={() => onAnswerSelected(answer, index)}
@@ -130,7 +130,7 @@ const Quiz = () => {
                       <div className="text-colegio-background font-sans font-bold text-xl m-2 text-center">CS Career Guide AI Quiz</div>
                   </div>
                     <p className="text-colegio-background font-sans font-bold text-lg m-2 text-center">Which of these do you consider your specialty?</p>
-            <div className="grid place-content-center align-center justify-center grid-cols-3">
+            <div className="grid place-content-center align-center justify-center md:grid-cols-2 lg:grid-cols-3">
                 {profChoices.map((answer, index) => (
                     <span className="grid place-content-center justify-self-center  align-bottom w-64 h-20 text-center bg-colegio-light-green  hover:bg-colegio-light-green text-colegio-dark-green text-base font-sans font-bold rounded-2xl border-4 m-4 border-colegio-green"
                         onClick={() => onFieldSelected(answer, index)}
@@ -175,7 +175,7 @@ const Quiz = () => {
                   </div>
             <div>
             <p className="text-colegio-background font-sans font-bold text-lg m-2 text-center">Your recommended career path is: </p>
-            <p className="text-colegio-background font-sans font-bold text-4xl m-2 text-center mt-12 m-24">{responseState.message}</p>
+            <p className="text-colegio-background font-sans font-bold lg:text-4xl text-3xl m-2 text-center mt-12 m-24">{responseState.message}</p>
             </div>
           </div>
             ): (
