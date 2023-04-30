@@ -65,17 +65,20 @@ color: #14C38E;
 
 .swiper-slide {
     width: 32% !important;
+    padding: 2% 0%;
 
 }
 .swiper {
   width: 68% !important;
   height: 25% !important;
 
+
 }
 .swiper-wrapper{
     display: flex !important;
     justify-content: left !important;
 }
+
 .Divider {
     width: 55%;
     height: 0px;
