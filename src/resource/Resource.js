@@ -7,7 +7,7 @@ import Search from "../search/Search";
 import axios from "axios";
 import "swiper/css";
 import "swiper/css/pagination";
-import {Pagination} from "swiper"
+import {Navigation, Pagination} from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react";
 import {AuthContext} from "../auth/AuthContext";
 import Blog from "../blog/Blog"
@@ -73,9 +73,14 @@ function Resource() {
 <div className={isModalOpen ? "opacity-70 flex relative justify-center" : "opacity-100 flex relative justify-center"}>
     {console.log(blogs)}<Swiper
         className={'flex justify-center'}
-        slidesPerView={3}
-        spaceBetween={20}
-        modules={[Pagination]}
+        slidesPerView={'auto'}
+        spaceBetween={0}
+        modules={[Pagination, Navigation]}
+        pagination={{ clickable: true }}
+        navigation={{
+        prevEl: '.swiper-button-prev',
+        nextEl: '.swiper-button-next',
+      }}
       >
         {blogs.map((blog) => (
 
@@ -134,9 +139,15 @@ function Resource() {
     <div className="flex space-x-6 justify-center">
         <Swiper
         className={'flex justify-center '}
-        slidesPerView={3}
-        spaceBetween={20}
-        modules={[Pagination]}
+        slidesPerView={'auto'}
+        spaceBetween={0}
+        modules={[Pagination, Navigation]}
+        pagination={{ clickable: true }}
+        navigation={{
+        prevEl: '.swiper-button-prev',
+        nextEl: '.swiper-button-next',
+      }}
+
       >
             <SwiperSlide><Organization /></SwiperSlide>
             <SwiperSlide><Organization /></SwiperSlide>
@@ -156,9 +167,14 @@ function Resource() {
     <div className="flex space-x-6 justify-center">
         <Swiper
         className={'flex justify-center '}
-        slidesPerView={3}
-        spaceBetween={20}
-        modules={[Pagination]}
+        slidesPerView={'auto'}
+        spaceBetween={0}
+        modules={[Pagination, Navigation]}
+        pagination={{ clickable: true }}
+        navigation={{
+        prevEl: '.swiper-button-prev',
+        nextEl: '.swiper-button-next',
+      }}
       >
             <SwiperSlide><Research/></SwiperSlide>
             <SwiperSlide><Research/></SwiperSlide>
