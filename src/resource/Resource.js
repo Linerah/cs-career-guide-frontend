@@ -13,7 +13,7 @@ import {AuthContext} from "../auth/AuthContext";
 import Blog from "../blog/Blog"
 
 function Resource() {
-
+    const profChoices = ['Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']
     const {currentUser} = useContext((AuthContext))
     console.log(currentUser)
     const [blogs, setBlogs] = useState([]);
@@ -22,7 +22,7 @@ function Resource() {
         console.log(blogValues)
         setBlogs(blogValues);
     };
-
+    const [blogTag, setBlogTag] = useState('Programming Languages');
     useEffect(() => {
         axios.get('https://cscg-blog-search-service.herokuapp.com/blogs', {
             params: {
@@ -48,17 +48,24 @@ function Resource() {
         setIsModalOpen(false);
     };
 
+    const handleBlogChangeTag = (event) => {
+        const value = event.target.value;
+        setBlogTag(value);
+    };
+
     async function handleBlogSubmit(event) {
         let inputs = {}
         event.preventDefault(); // prevent page refresh
         const formData = new FormData(event.target);
         for (const [key, value] of formData.entries()) {
-            inputs[key] = [value];
+            inputs[key] = value;
         }
         inputs['user_id'] = currentUser._id
         await axios.post("https://cscg-blog-search-service.herokuapp.com/create_blog", inputs);
+        window.location.reload(false);
         setIsModalOpen(false);
     }
+
     return <>
     
     <Banner page="home"/>
@@ -119,6 +126,14 @@ function Resource() {
                              className="font-sans font-bold peer-focus:font-medium absolute text-xl text-colegio-background duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-colegio-green-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Link</label>
                   </div>
 
+                  <label htmlFor="underline_select" className="sr-only">Tag</label>
+                  <select  value={blogTag} onChange={handleBlogChangeTag} id="underline_select"
+                          className="mb-2 block py-2.5 px-0 w-full text-lg text-colegio-background bg-transparent border-0 border-b-2 border-colegio-background appearance-none focus:outline-none focus:ring-0 focus:border-colegio-background font-bold font-sans peer">
+                                          {profChoices.map((value) => (
+                        <option className="bg-colegio-green font-bold font-sans" value={value}>{value}</option>
+                    ))}
+                    <input type="text" name="tag" value={blogTag}/>
+                  </select>
                   <button className="bg-colegio-green-2 text-colegio-dark-green font-sans font-bold rounded-lg p-2 float-right" type="submit" value="Submit" > Submit </button>
               </div>
         </form>
