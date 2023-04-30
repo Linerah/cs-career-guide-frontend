@@ -25,8 +25,6 @@ function Search(props) {
         e.preventDefault();
 
         try {
-            console.log(category)
-            console.log(props.data.route)
             const response = await axios.post(props.data.route, {"blog-filter": category, "blog-title": text, "user_id": currentUser._id});
             props.onBlogs(response.data);
 
