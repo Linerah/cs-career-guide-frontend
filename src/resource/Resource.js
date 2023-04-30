@@ -133,7 +133,19 @@ function Resource() {
         <Search  data={{route: "",resource: "orgs", options: ["","Newest", "Oldest", "Most upvote"]}}/> 
     </div>
     <div className="flex space-x-6 justify-center">
-        <Organization /><Organization /><Organization />
+        <Swiper
+        className={'flex justify-center '}
+        slidesPerView={3}
+        spaceBetween={20}
+        modules={[Pagination]}
+      >
+            <SwiperSlide><Organization /></SwiperSlide>
+            <SwiperSlide><Organization /></SwiperSlide>
+            <SwiperSlide><Organization /></SwiperSlide>
+            <SwiperSlide><Organization /></SwiperSlide>
+
+      </Swiper>
+
     </div>
 
     <div className="flex justify-center my-9">
@@ -143,7 +155,18 @@ function Resource() {
         <Search  data={{route: "",resource: "research", options: ["","Newest", "Oldest"]}}/> 
     </div>
     <div className="flex space-x-6 justify-center">
-        <Research /><Research /> <Research />
+        <Swiper
+        className={'flex justify-center '}
+        slidesPerView={3}
+        spaceBetween={20}
+        modules={[Pagination]}
+      >
+            <SwiperSlide><Research/></SwiperSlide>
+            <SwiperSlide><Research/></SwiperSlide>
+            <SwiperSlide><Research/></SwiperSlide>
+            <SwiperSlide><Research/></SwiperSlide>
+
+      </Swiper>
     </div>
     </>
 }
