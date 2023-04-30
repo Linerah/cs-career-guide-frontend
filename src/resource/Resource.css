@@ -69,14 +69,21 @@ color: #14C38E;
 
 
 }
-
+.blog_height{
+    height: 37%
+}
+.research_height{
+    height: 30%
+}
 .swiper {
-  width: 65% !important;
-  height: 25% !important;
+    width: 65% !important;
+    /*height: 25% !important;*/
     autoHeight: true !important;
 
 
+
 }
+
 .swiper-wrapper{
     display: flex !important;
     justify-content: left !important;
@@ -130,7 +137,7 @@ li {
     align-items: center;
 
     width: 407px;
-    height: 40%;
+    height: 100%;
 }
 
 .Organization_image {
@@ -193,7 +200,7 @@ li {
     align-items: center;
 
     width: 407px;
-    height: 40%;
+    height: 100%;
 }
 
 .Research_image {
