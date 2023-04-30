@@ -62,8 +62,8 @@ function Resource() {
     return <>
     
     <Banner page="home"/>
-    <div className="flex justify-center my-9">
-        
+<div className={'main'}>
+    <div className="flex justify-center divider_container">
         <div className="Divider_Tittle"> Blogs </div>
             <div className="Divider">
             
@@ -72,7 +72,7 @@ function Resource() {
     </div>
 <div className={isModalOpen ? "opacity-70 flex relative justify-center" : "opacity-100 flex relative justify-center"}>
     {console.log(blogs)}<Swiper
-        className={'flex justify-center '}
+        className={'flex justify-center'}
         slidesPerView={3}
         spaceBetween={20}
         modules={[Pagination]}
@@ -90,7 +90,6 @@ function Resource() {
         {currentUser.isProfessor && <button className="m-auto absolute top-24 right-20 bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
         </svg></button>}
-   <div className="w-1/6"> </div>
 </div>
     <div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
@@ -126,7 +125,7 @@ function Resource() {
       </Modal>
 </div>
 
-    <div className="flex justify-center my-9">
+    <div className="flex justify-center divider_container">
         <div className="Divider_Tittle">Organizations</div>
             <div className="Divider">
         </div>
@@ -148,7 +147,7 @@ function Resource() {
 
     </div>
 
-    <div className="flex justify-center my-9">
+    <div className="flex justify-center divider_container">
         <div className="Divider_Tittle">Research</div>
             <div className="Divider">
         </div>
@@ -168,6 +167,7 @@ function Resource() {
 
       </Swiper>
     </div>
+        </div>
     </>
 }
 export default Resource;
