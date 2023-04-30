@@ -145,32 +145,7 @@ function Resource() {
       </Modal>
 </div>
 
-    <div className="flex justify-center divider_container">
-        <div className="Divider_Tittle">Organizations</div>
-            <div className="Divider">
-        </div>
-        <Search  data={{route: "",resource: "orgs", options: ["","Newest", "Oldest", "Most upvote"]}}/> 
-    </div>
- <div className={isModalOpen ? "opacity-70 flex relative justify-center research_height" : "opacity-100 flex relative justify-center research_height"}>
-        <Swiper
-        className={'flex justify-center '}
-        slidesPerView={'auto'}
-        spaceBetween={0}
-        modules={[Pagination, Navigation]}
-        pagination={{ clickable: true }}
-        navigation={{
-        prevEl: '.swiper-button-prev',
-        nextEl: '.swiper-button-next',
-      }}
 
-      >
-            <SwiperSlide><Organization /></SwiperSlide>
-            <SwiperSlide><Organization /></SwiperSlide>
-            <SwiperSlide><Organization /></SwiperSlide>
-            <SwiperSlide><Organization /></SwiperSlide>
-
-      </Swiper>
-    </div>
 
     <div className="flex justify-center divider_container">
         <div className="Divider_Tittle">Research</div>
@@ -194,6 +169,33 @@ function Resource() {
             <SwiperSlide><Research/></SwiperSlide>
             <SwiperSlide><Research/></SwiperSlide>
             <SwiperSlide><Research/></SwiperSlide>
+
+      </Swiper>
+    </div>
+        <div className="flex justify-center divider_container">
+        <div className="Divider_Tittle">Organizations</div>
+            <div className="Divider">
+        </div>
+        <Search  data={{route: "",resource: "orgs", options: ["","Newest", "Oldest", "Most upvote"]}}/>
+    </div>
+
+ <div className={isModalOpen ? "opacity-70 flex relative justify-center research_height" : "opacity-100 flex relative justify-center research_height"}>
+        <Swiper
+        className={'flex justify-center '}
+        slidesPerView={'auto'}
+        spaceBetween={0}
+        modules={[Pagination, Navigation]}
+        pagination={{ clickable: true }}
+        navigation={{
+        prevEl: '.swiper-button-prev',
+        nextEl: '.swiper-button-next',
+      }}
+
+      >
+            <SwiperSlide><Organization /></SwiperSlide>
+            <SwiperSlide><Organization /></SwiperSlide>
+            <SwiperSlide><Organization /></SwiperSlide>
+            <SwiperSlide><Organization /></SwiperSlide>
 
       </Swiper>
     </div>
