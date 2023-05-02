@@ -55,7 +55,12 @@ function App() {
     },
     {
       path: "/quiz",
-      element: <Quiz />,
+      element: (
+          <ProtectedRoute>
+          <Layout>
+            <Quiz />
+          </Layout>
+          </ProtectedRoute>),
     }
   ]);
 
