@@ -9,10 +9,22 @@ function Research(props){
     const handleApplyClick = () => {
 
     }
-    // this is going to break
+
     const handlePDFClick = () => {
-        window.open(props.data.file, '_blank')
+        const pdfData = atob(props.data.file);
+        const arrayBuffer = new ArrayBuffer(pdfData.length);
+        const uint8Array = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < pdfData.length; i++) {
+            uint8Array[i] = pdfData.charCodeAt(i);
+        }
+        const blob = new Blob([uint8Array], { type: "application/pdf" });
+        const dataUri = URL.createObjectURL(blob);
+        const newWindow = window.open(dataUri, "_blank", "noopener,noreferrer");
+        if (newWindow) {
+            newWindow.opener = null;
+        }
     }
+
     return <div className="Research flex overflow-hidden justify-center">
             <div className="Research_container">
                <div className="Research_logo rounded-full h-full" >
