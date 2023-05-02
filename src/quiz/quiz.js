@@ -8,6 +8,7 @@ import {AuthContext} from "../auth/AuthContext";
 const Quiz = () => {
   const [activeQuestion, setActiveQuestion] = useState(0)
   const [showResult, setShowResult] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(true)
   const [profShowResult, setProfShowResult] = useState(false)
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null)
   const [answers] = useState({})
@@ -86,24 +87,41 @@ const Quiz = () => {
     navigate('/home')
   }
 
+
+  function handleButtonClick() {
+    setShowWelcome(false)
+  }
+
   return <>
     <Banner page = "quiz" />
     <div className="bg-colegio-background flex justify-center ">
         <div className="lg:m-16 m-6 lg:w-5/12 w-11/12 h-fit bg-colegio-green rounded-md  h-max">
-            {!showResult ? (
-        <div>
+          { showWelcome ?(
+              <div>
+                <div className="border-b-2 m-8 border-colegio-light-green justify-center">
+                  <div className="text-colegio-background font-sans font-bold md:text-2xl m-2 text-center text-lg">CS Career Guide AI Quiz</div>
 
-            <div className="border-b-2 m-8 border-colegio-light-green">
-              <div className="text-colegio-background font-sans font-bold md:text-2xl m-2 text-center text-lg">CS Career Guide AI Quiz</div>
-                <div className="grid m-2 place-content-end">
-                    <span className="text-colegio-green-2 font-sans font-bold md:text-lg text-md ">
+                  </div>
+                <div className="flex flex-col items-center justify-center">
+                  <p className="text-colegio-background font-sans font-bold md:text-xl m-2 text-center text-lg">Explanation of the quiz BLAH BLAH</p>
+                  <button onClick={handleButtonClick} className="justify-center text-2xl place-content-center justify-self-center  align-bottom w-64 h-20 text-center bg-colegio-light-green  hover:bg-colegio-light-green text-colegio-dark-green text-base font-sans font-bold rounded-2xl border-4 m-4 border-colegio-green">
+                    Start Quiz!
+                  </button>
+                  </div>
+              </div>
+          ) :!showResult ? (
+
+              <div>
+                <div className="border-b-2 m-8 border-colegio-light-green">
+                  <div className="text-colegio-background font-sans font-bold md:text-2xl m-2 text-center text-lg">CS Career Guide AI Quiz</div>
+                    <div className="grid m-2 place-content-end">
+                      <span className="text-colegio-green-2 font-sans font-bold md:text-lg text-md ">
                         {addLeadingZero(activeQuestion + 1)}/{addLeadingZero(questions.length)}
-                    </span>
-                </div>
-            </div>
+                      </span>
+                  </div>
+              </div>
 
             <h2 className="text-colegio-background font-sans font-bold md:text-2xl text-lg m-2 pb-4 text-center">{question}</h2>
-
             <div className="grid place-content-center align-center justify-center md:grid-cols-2">
                 {choices.map((answer, index) => (
                     <span className="grid place-content-center justify-self-center  align-bottom w-64 h-20 text-center bg-colegio-light-green  hover:bg-colegio-light-green text-colegio-dark-green text-base font-sans font-bold rounded-2xl border-4 m-4 border-colegio-green"
