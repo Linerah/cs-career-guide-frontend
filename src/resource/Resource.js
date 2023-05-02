@@ -20,6 +20,8 @@ function Resource() {
     const [loading, setLoading] = useState(true);
     console.log(currentUser)
     const [researchs, setResearch] = useState([])
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [base64String, setBase64String] = useState("");
     const handleResearchValues = (researchValues) => {
         setResearch(researchValues)
     }
@@ -96,21 +98,32 @@ function Resource() {
         window.location.reload(false);
 
     }
+    const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
 
     async function handleResearchSubmit(event) {
         let inputs = {}
         event.preventDefault()
+
         const formData = new FormData(event.target);
         for (const [key, value] of formData.entries()) {
             inputs[key] = value;
         }
-        console.log(typeof inputs['file'])
-        inputs['file'] = btoa(inputs['file'])
-        console.log(typeof inputs['file'])
+
         inputs['user_id'] = currentUser._id
-        //await axios.post("http://127.0.0.1:5000/create_research", inputs)
+
+        const file = selectedFile
+        const reader = new FileReader()
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            const base64 = reader.result.replace("data:application/pdf;base64,","");
+            setBase64String(base64);
+        }
+        inputs['file'] = base64String
+        await axios.post("https://cscg-blog-search-service.herokuapp.com/create_blogcreate_research", inputs)
         setIsModalOpen(false);
-       // window.location.reload(false);
+        window.location.reload(false);
     }
 
     return <>
@@ -376,8 +389,8 @@ function Resource() {
                   <label className="block mb-2 mt-4 text-lg font-bold font-sans text-colegio-background" htmlFor="file_input">Upload
                       file</label>
                   <input
-                      className="block w-full text-lg bg-colegio-green border border-colegio-background rounded-lg cursor-pointer text-colegio-background focus:outline-none "
-                      id="file" type="file"/>
+                      accept=".pdf" className="block w-full text-lg bg-colegio-green border border-colegio-background rounded-lg cursor-pointer text-colegio-background focus:outline-none "
+                      id="file" type="file" onChange={handleFileChange}/>
                   <button className="mt-2 bg-colegio-green-2 text-colegio-dark-green font-sans font-bold rounded-lg p-2 float-right" type="submit" value="Submit" > Submit </button>
               </div>
         </form>
