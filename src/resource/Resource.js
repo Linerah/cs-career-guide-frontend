@@ -108,7 +108,7 @@ function Resource() {
         inputs['file'] = btoa(inputs['file'])
         console.log(inputs['file'])
         inputs['user_id'] = currentUser._id
-        //await axios.post("https://cscg-blog-search-service.herokuapp.com/create_research", inputs)
+        await axios.post("http://127.0.0.1:5000/create_research", inputs)
         setIsModalOpen(false);
        // window.location.reload(false);
     }
@@ -327,7 +327,7 @@ function Resource() {
         prevEl: '.swiper-button-prev',
         nextEl: '.swiper-button-next',
       }}
-      >
+      >{console.log(researchs)}
             {researchs.map((research) => (
                 <SwiperSlide > <Research data={{title: research.title, information: research.information,
                     link: research.link, research_id: research.research_id, tag: research.tag,  file: research.file}}/>
