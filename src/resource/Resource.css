@@ -22,6 +22,28 @@ border-bottom: 1px solid #E7F6D2;
     flex-direction: column;
 }
 
+.loading_blog_info_container{
+    height: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.loading_upvote {
+    opacity: 25%;
+    position: relative;
+    float: right;
+    background-color: #00FFAB;
+    color: #1A6A52;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0px;
+    width: 35%;
+}
+
 .Menu_button {
 
 font-family: 'DM Sans';
