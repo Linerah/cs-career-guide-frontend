@@ -104,11 +104,11 @@ function Resource() {
         for (const [key, value] of formData.entries()) {
             inputs[key] = value;
         }
-        console.log(inputs['file'])
+        console.log(typeof inputs['file'])
         inputs['file'] = btoa(inputs['file'])
-        console.log(inputs['file'])
+        console.log(typeof inputs['file'])
         inputs['user_id'] = currentUser._id
-        await axios.post("http://127.0.0.1:5000/create_research", inputs)
+        //await axios.post("http://127.0.0.1:5000/create_research", inputs)
         setIsModalOpen(false);
        // window.location.reload(false);
     }

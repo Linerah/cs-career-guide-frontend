@@ -11,7 +11,8 @@ function Research(props){
     }
     // this is going to break
     const handlePDFClick = () => {
-        window.open(props.data.file, '_blank')
+        console.log(typeof props.data.file)
+        window.open(atob(props.data.file) +'.pdf', '_blank')
     }
     return <div className="Research flex overflow-hidden justify-center">
             <div className="Research_container">
