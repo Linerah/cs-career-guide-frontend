@@ -11,7 +11,7 @@ function Blog(props) {
     return <div className="Blog flex overflow-hidden justify-center">
 
             <img className=" w-1/2" src="mchine.jpg" alt="logo"></img>
-            <div className="p-1 text-center rounded-bl-sm absolute start-0 bottom-0 bg-colegio-green text-colegio-background font-sans font-bold w-6/12"> {props.data.tag} </div>
+            <div className="p-1 text-center rounded-bl-sm absolute start-0 bottom-0 bg-colegio-green text-colegio-background font-sans font-bold w-1/2"> {props.data.tag} </div>
             <div className="Blog_container w-1/2 overflow-hidden">
                 <div className="Blog_professor_container flex w-100 justify-center items-center">
                     <div className="profile_gradient mr-auto rounded-full p-0.5 flex justify-center items-center">
