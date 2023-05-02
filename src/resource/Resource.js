@@ -59,13 +59,22 @@ function Resource() {
             console.log(error);
           });
       }, []);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false); // This one is to simplify hiding carousel
+    const [isBlogModalOpen, setIsBlogModalOpen] = useState(false);
+    const [isResearchModalOpen, setIsResearchModalOpen] = useState(false);
 
-    const handleOpenModal = () => {
+    const handleOpenModal = (event) => {
         setIsModalOpen(true);
+        if (event.currentTarget.name === 'blogModal'){
+            setIsBlogModalOpen(true)
+        }else if (event.currentTarget.name === 'researchModal'){
+            setIsResearchModalOpen(true)
+        }
     };
 
     const handleCloseModal = () => {
+        setIsBlogModalOpen(false);
+        setIsResearchModalOpen(false);
         setIsModalOpen(false);
     };
 
@@ -83,8 +92,25 @@ function Resource() {
         }
         inputs['user_id'] = currentUser._id
         await axios.post("https://cscg-blog-search-service.herokuapp.com/create_blog", inputs);
-        window.location.reload(false);
         setIsModalOpen(false);
+        window.location.reload(false);
+
+    }
+
+    async function handleResearchSubmit(event) {
+        let inputs = {}
+        event.preventDefault()
+        const formData = new FormData(event.target);
+        for (const [key, value] of formData.entries()) {
+            inputs[key] = value;
+        }
+        console.log(inputs['file'])
+        inputs['file'] = btoa(inputs['file'])
+        console.log(inputs['file'])
+        inputs['user_id'] = currentUser._id
+        //await axios.post("https://cscg-blog-search-service.herokuapp.com/create_research", inputs)
+        setIsModalOpen(false);
+       // window.location.reload(false);
     }
 
     return <>
@@ -226,10 +252,7 @@ function Resource() {
             
           
             </div>
-
-            :
-            blogs.map((blog) => (
-
+            : blogs.map((blog) => (
             currentUser.isProfessor ?
                 (currentUser._id === blog.user_info[0]._id ?
                <SwiperSlide > <Blog data={{title: blog.title, information: blog.information, link: blog.link, blog_id: blog.blog_id, upvote: blog.upvote, tag: blog.tag, name: blog.user_info[0].name}}/></SwiperSlide> :
@@ -239,12 +262,12 @@ function Resource() {
         }
       </Swiper>
 
-        {currentUser.isProfessor && <button className="m-auto absolute top-24 right-20 bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        {currentUser.isProfessor && <button name="blogModal" className="m-auto absolute top-24 right-20 bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
         </svg></button>}
 </div>
     <div>
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+      <Modal isOpen={isBlogModalOpen} onClose={handleCloseModal}>
         <h1 className="text-colegio-background font-sans font-bold text-xl m-2 text-center">Share a new Blog!</h1>
           <form onSubmit={handleBlogSubmit}>
               <div className="">
@@ -312,7 +335,53 @@ function Resource() {
                 ))}
 
       </Swiper>
+    {currentUser.isProfessor && <button name="researchModal" className="m-auto absolute top-24 right-20 bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+        </svg></button>}
     </div>
+          <Modal isOpen={isResearchModalOpen} onClose={handleCloseModal}>
+        <h1 className="text-colegio-background font-sans font-bold text-xl m-2 text-center">Share a new Research!</h1>
+          <form onSubmit={handleResearchSubmit}>
+              <div className="">
+                      <div className="relative z-0 w-full mb-6 group">
+                      <input type="text" name="title" id="title"
+                             className="font-sans font-bold block py-2.5 px-0 w-full text-lg text-colegio-background bg-transparent border-0 border-b-2 border-colegio-background appearance-none focus:outline-none focus:ring-0 focus:border-colegio-green-2  peer"
+                             placeholder=" " required/>
+                      <label htmlFor="title"
+                             className="font-sans font-bold peer-focus:font-medium absolute text-xl text-colegio-background duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-colegio-green-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Title</label>
+                  </div>
+                      <div className="relative z-0 w-full mb-6 group">
+                      <input type="text" name="information" id="information"
+                             className="font-sans font-bold block py-2.5 px-0 w-full text-lg text-colegio-background bg-transparent border-0 border-b-2 border-colegio-background appearance-none focus:outline-none focus:ring-0 focus:border-colegio-green-2  peer"
+                             placeholder=" " required/>
+                      <label htmlFor="information"
+                             className="font-sans font-bold peer-focus:font-medium absolute text-xl text-colegio-background duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-colegio-green-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Information</label>
+                  </div>
+                  <div className="relative z-0 w-full mb-6 group">
+                      <input type="text" name="link" id="link"
+                             className="font-sans font-bold block py-2.5 px-0 w-full text-lg text-colegio-background bg-transparent border-0 border-b-2 border-colegio-background appearance-none focus:outline-none focus:ring-0 focus:border-colegio-green-2  peer"
+                             placeholder=" " required/>
+                      <label htmlFor="link"
+                             className="font-sans font-bold peer-focus:font-medium absolute text-xl text-colegio-background duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-colegio-green-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Link</label>
+                  </div>
+
+                  <label htmlFor="underline_select" className="sr-only">Tag</label>
+                  <select  value={blogTag} onChange={handleBlogChangeTag} id="underline_select"
+                          className="mb-2 block py-2.5 px-0 w-full text-lg text-colegio-background bg-transparent border-0 border-b-2 border-colegio-background appearance-none focus:outline-none focus:ring-0 focus:border-colegio-background font-bold font-sans peer">
+                                          {profChoices.map((value) => (
+                        <option className="bg-colegio-green font-bold font-sans" value={value}>{value}</option>
+                    ))}
+                    <input type="text" name="tag" value={blogTag}/>
+                  </select>
+                  <label className="block mb-2 mt-4 text-lg font-bold font-sans text-colegio-background" htmlFor="file_input">Upload
+                      file</label>
+                  <input
+                      className="block w-full text-lg bg-colegio-green border border-colegio-background rounded-lg cursor-pointer text-colegio-background focus:outline-none "
+                      id="file" type="file"/>
+                  <button className="mt-2 bg-colegio-green-2 text-colegio-dark-green font-sans font-bold rounded-lg p-2 float-right" type="submit" value="Submit" > Submit </button>
+              </div>
+        </form>
+      </Modal>
         <div className="flex justify-center divider_container">
         <div className="Divider_Tittle">Organizations</div>
             <div className="Divider">
