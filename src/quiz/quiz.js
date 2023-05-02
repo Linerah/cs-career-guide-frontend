@@ -103,7 +103,8 @@ const Quiz = () => {
 
                   </div>
                 <div className="flex flex-col items-center justify-center">
-                  <p className="text-colegio-background font-sans font-bold md:text-xl m-2 text-center text-lg">Explanation of the quiz BLAH BLAH</p>
+                  <p className="text-colegio-background font-sans font-bold md:text-xl m-2 text-center text-lg">The questions in this quiz are used for our AI to understand and identify the subfield that will fit you the most.</p>
+                 <p className="text-colegio-background font-sans font-bold md:text-xl m-2 text-center text-lg">Answers are confidential!!</p>
                   <button onClick={handleButtonClick} className="justify-center text-2xl place-content-center justify-self-center  align-bottom w-64 h-20 text-center bg-colegio-light-green  hover:bg-colegio-light-green text-colegio-dark-green text-base font-sans font-bold rounded-2xl border-4 m-4 border-colegio-green">
                     Start Quiz!
                   </button>
