@@ -11,11 +11,17 @@ import {Navigation, Pagination} from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react";
 import {AuthContext} from "../auth/AuthContext";
 import Blog from "../blog/Blog"
+import Research from "../research/research"
+// import Organization from "../organization/organization"
 
 function Resource() {
     const profChoices = ['Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']
     const {currentUser} = useContext((AuthContext))
     console.log(currentUser)
+    const [researchs, setResearch] = useState([])
+    const handleResearchValues = (researchValues) => {
+        setResearch(researchValues)
+    }
     const [blogs, setBlogs] = useState([]);
     const handleBlogValues = (blogValues) => {
         console.log('Im heree')
@@ -37,7 +43,20 @@ function Resource() {
             console.log(error);
           });
       }, []);
-
+    useEffect(() => {
+        axios.get('https://cscg-blog-search-service.herokuapp.com/research', {
+            params: {
+              "user_id": currentUser._id
+            }
+          })
+          .then(response => {
+            console.log(response.data)
+            setResearch(response.data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }, []);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleOpenModal = () => {
@@ -75,7 +94,7 @@ function Resource() {
             <div className="Divider">
             
         </div>
-        <Search onBlogs={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: ["","Newest", "Oldest", "Most upvote", 'Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']}}/>
+       <Search onSection={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: [" ","Newest", "Oldest", "Most upvote", 'Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']}}/>
     </div>
 <div className={isModalOpen ? "opacity-70 flex relative justify-center blog_height" : "opacity-100 flex relative justify-center blog_height"}>
     <Swiper
@@ -151,7 +170,7 @@ function Resource() {
         <div className="Divider_Tittle">Research</div>
             <div className="Divider">
         </div>
-        <Search  data={{route: "",resource: "research", options: ["","Newest", "Oldest"]}}/> 
+        <Search onResearch={handleResearchValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/research",resource: "research", options: [" ","Newest", "Oldest", "Most upvote", 'Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']}}/>
     </div>
 <div className={isModalOpen ? "opacity-70 flex relative justify-center research_height" : "opacity-100 flex relative justify-center research_height"}>
         <Swiper
@@ -165,10 +184,11 @@ function Resource() {
         nextEl: '.swiper-button-next',
       }}
       >
-            <SwiperSlide><Research/></SwiperSlide>
-            <SwiperSlide><Research/></SwiperSlide>
-            <SwiperSlide><Research/></SwiperSlide>
-            <SwiperSlide><Research/></SwiperSlide>
+            {researchs.map((research) => (
+                <SwiperSlide > <Research data={{title: research.title, information: research.information,
+                    link: research.link, research_id: research.research_id, tag: research.tag,  file: research.file}}/>
+                </SwiperSlide>
+                ))}
 
       </Swiper>
     </div>
@@ -176,7 +196,6 @@ function Resource() {
         <div className="Divider_Tittle">Organizations</div>
             <div className="Divider">
         </div>
-        <Search  data={{route: "",resource: "orgs", options: ["","Newest", "Oldest", "Most upvote"]}}/>
     </div>
 
  <div className={isModalOpen ? "opacity-70 flex relative justify-center research_height" : "opacity-100 flex relative justify-center research_height"}>
@@ -218,26 +237,6 @@ function Organization(){
                 <div className="Organzation_button_container pt-4">
                     <button className="Organzation_button rounded-lg font-bold">
                         Join Now!
-                    </button>
-                </div>
-            </div>
-        </div>
-
-}
-
-function Research(){
-    return <div className="Research flex overflow-hidden justify-center">
-            <div className="Research_container"> 
-               <div className="Research_logo rounded-full h-full" >
-                    <img className="p-4 w-24 h-24" src="NASA_logo.svg.webp" alt="logo"></img>
-                </div> 
-                <h1 className="Research_tittle">Image Processing </h1>
-            </div>    
-            <div className="Research_container w-1/2">
-                <h2 className="Research_information font-bold">Using satellite data, process images of the earth!</h2>
-                <div className="Research_button_container pt-4">
-                    <button className="Research_button rounded-lg font-bold">
-                        Apply Now!
                     </button>
                 </div>
             </div>

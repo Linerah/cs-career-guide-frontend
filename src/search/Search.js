@@ -23,10 +23,29 @@ function Search(props) {
 
     const handleItems = async (e) => {
         e.preventDefault();
+        let resource = props.data.resource;
+        try {
+            if (resource.equals("blogs")){
+                const response = await axios.post(props.data.route, {"blog-filter": category, "blog-title": text, "user_id": currentUser._id});
+            props.onSection(response.data);
+            }
+            if (resource.equals("research")){
+                const response = await axios.post(props.data.route, {"research-filter": category, "research-title": text, "user_id": currentUser._id});
+            props.onSection(response.data);
+            }
+
+
+        } catch (err) {
+            console.log(err.response.data);
+        }
+    };
+
+    const handleResearchItems = async (e) => {
+        e.preventDefault();
 
         try {
-            const response = await axios.post(props.data.route, {"blog-filter": category, "blog-title": text, "user_id": currentUser._id});
-            props.onBlogs(response.data);
+            const response = await axios.post(props.data.route, {"research-filter": category, "research-title": text, "user_id": currentUser._id});
+            props.onResearch(response.data);
 
         } catch (err) {
             console.log(err.response.data);
