@@ -1,0 +1,53 @@
+.Research_height{
+    height: 30%
+}
+
+.Research_logo {
+    background-color: #14C38E;
+}
+
+.Research_information {
+    color: #14C38E;
+    text-align: center;
+    font-size: 14px;
+    height: 75%;
+}
+
+.Research_title {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+    /* identical to box height, or 120% */
+
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #14C38E;
+    height: 25%;
+
+}
+
+.Research_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Research_button{
+    background-color: #00FFAB;
+    color: #1A6A52;
+    font-size: 15px;
+    margin: 0;
+    padding: 5px 25px;
+}
+
+.Research_button_container {
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
