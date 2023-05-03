@@ -23,29 +23,19 @@ function Search(props) {
 
     const handleItems = async (e) => {
         e.preventDefault();
-        console.log(props.data)
         let resource = props.data.resource;
-        console.log('HELLO!')
-        console.log(resource)
         try {
             if (resource === "blogs"){
-                console.log('Hii!')
                 const response = await axios.post(props.data.route, {"blog-filter": category, "blog-title": text, "user_id": currentUser._id});
-                console.log(response)
             props.onSection(response.data);
             }
             else if(resource === "research"){
-                console.log('kevin!')
-                console.log(text)
-                console.log(category)
                 const response = await axios.post(props.data.route, {"research-filter": category, "research-title": text, "user_id": currentUser._id});
-                console.log(response)
             props.onSection(response.data);
             }
 
 
         } catch (err) {
-            console.log("ErroR!!")
             console.log(err.response.data);
         }
     };
