@@ -52,17 +52,19 @@ const Banner = ({page}) =>{
             </div>
 
             <div className="Menu_tittle flex w-1/2 justify-center">
-                <img className="h-16" src="logo_menu.png" alt="logo"/>
+                <img className="h-12" src="logo_menu.png" alt="logo"/>
             </div>
 
             <div className="flex w-1/4 space-x-6 justify-center items-center">
                 <div className="profile_gradient rounded-full p-0.5 flex justify-center items-center">
                     <div className="rounded-full p-1 bg-white flex justify-center items-center">
-                        <img className="h-10" src={`https://api.dicebear.com/5.x/adventurer/svg?seed=${currentUser.name}`} alt="profile"/>
+                        <img className="h-8" src={`https://api.dicebear.com/5.x/adventurer/svg?seed=${currentUser.name}`} alt="profile"/>
                     </div>
                 </div>
                 <div className="Menu_button" onClick={handleLogout}>
-                    Logout
+                    <span class="material-symbols-outlined flex justify-center items-center">
+                        logout
+                    </span>
                 </div>
             </div>
         </div>
