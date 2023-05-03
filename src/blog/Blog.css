@@ -5,6 +5,7 @@
     background: #14C38E;
     border-radius: 15px;
     display: flex;
+    align-items: center;
 }
 
 .Blog_info_container{

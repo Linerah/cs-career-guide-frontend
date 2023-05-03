@@ -1,53 +1,93 @@
-.Research_height{
-    height: 30%
+.Research {
+    position: relative;
+    width: 407px;
+    height: 100%;
+    background: #14C38E;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
 }
-
-.Research_logo {
-    background-color: #14C38E;
+.Research_add_button_container {
+    height: 210px;
 }
-
-.Research_information {
-    color: #14C38E;
-    text-align: center;
-    font-size: 14px;
-    height: 75%;
+.Research_info_container{
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+.Research_professor_container {
+    height: 10%;
 
-.Research_title {
-    font-family: 'DM Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 24px;
-    /* identical to box height, or 120% */
-
-    text-align: center;
-    letter-spacing: 0.5px;
-
-    color: #14C38E;
-    height: 25%;
+}
+.Research_button_container {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
 .Research_container {
     display: flex;
     flex-direction: column;
+    margin: 0.5rem;
     justify-content: center;
     align-items: center;
+
+}
+.Research_tittle {
+    position: relative;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 15px;
+
+    /* identical to box height, or 120% */
+
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #F2F0EB;
+    height: 30%;
 }
 
+.Research_information {
+    position: relative;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 24px;
+    /* or 240% */
+
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #A2FFE0;
+    padding: 0px 5px;
+    height: 70%;
+
+
+}
 .Research_button{
     background-color: #00FFAB;
     color: #1A6A52;
-    font-size: 15px;
     margin: 0;
-    padding: 5px 25px;
-}
-
-.Research_button_container {
-    height: 25%;
-    display: flex;
+    padding: 5px 0;
     justify-content: center;
-    align-items: center;
-
+    width: 25%;
 }
+.Research_Apply_button{
+    background-color: #00FFAB;
+    color: #1A6A52;
+    margin: 0;
+    padding: 5px 0;
+    justify-content: center;
+    width: 75%;
+}
+
+

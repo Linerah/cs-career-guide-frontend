@@ -10,7 +10,7 @@ function Blog(props) {
 
     return <div className="Blog flex overflow-hidden justify-center">
 
-            <img className=" w-1/2" src="mchine.jpg" alt="logo"></img>
+            <img className="w-1/2" src={`https://api.dicebear.com/6.x/shapes/svg?shape1Color=0a5b83,1c799f,69d2e7&seed=${props.data.link}&backgroundColor=00FFAB,F2F0EB,1A6A52&shape1Color=00FFAB,F2F0EB,1A6A52&shape2Color=00FFAB,F2F0EB,1A6A52&shape3Color=00FFAB,F2F0EB,1A6A52&scale=200`} alt="logo"></img>
             <div className="p-1 text-center rounded-bl-sm absolute start-0 bottom-0 bg-colegio-green text-colegio-background font-sans font-bold w-1/2"> {props.data.tag} </div>
             <div className="Blog_container w-1/2 overflow-hidden">
                 <div className="Blog_professor_container flex w-100 justify-center items-center">

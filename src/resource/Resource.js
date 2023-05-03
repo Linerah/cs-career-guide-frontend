@@ -291,7 +291,7 @@ function Resource() {
         <div className="Divider_Tittle">Research</div>
             <div className="Divider">
         </div>
-        <Search onResearch={handleResearchValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/research",resource: "research", options: [" ","Newest", "Oldest", "Most upvote", 'Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']}}/>
+        <Search onSection={handleResearchValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/research",resource: "research", options: [" ","Newest", "Oldest", "Most upvote", 'Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']}}/>
     </div>
 <div className={isModalOpen ? "opacity-70 flex relative justify-center research_height" : "opacity-100 flex relative justify-center research_height"}>
         <Swiper
@@ -307,7 +307,7 @@ function Resource() {
       >
             {researchs.map((research) => (
                 <SwiperSlide > <Research data={{title: research.title, information: research.information,
-                    link: research.link, research_id: research.research_id, tag: research.tag,  file: research.file}}/>
+                    link: research.link, research_id: research.research_id, tag: research.tag,  file: research.file, name: research.user_info[0].name}}/>
                 </SwiperSlide>
                 ))}
 
