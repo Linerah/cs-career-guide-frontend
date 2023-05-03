@@ -304,7 +304,7 @@ function Resource() {
         prevEl: '.swiper-button-prev',
         nextEl: '.swiper-button-next',
       }}
-      >
+      >    { console.log(researchs)}
             {researchs.map((research) => (
                 <SwiperSlide > <Research data={{title: research.title, information: research.information,
                     link: research.link, research_id: research.research_id, tag: research.tag,  file: research.file, name: research.user_info[0].name}}/>
