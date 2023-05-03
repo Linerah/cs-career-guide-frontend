@@ -5,6 +5,7 @@ import {AuthContext} from "../auth/AuthContext";
 import {useContext, useState} from "react";
 import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
+import axios from "axios";
 
 function Blog(props) {
     const {currentUser} = useContext((AuthContext))
@@ -21,11 +22,13 @@ function Blog(props) {
     const handleGoBack = () => {
         setDeleteBlog(false)
     }
-    const handleDelete = () => {
-        //Waiting for back end implementation
+    const handleDelete = async () => {
+        await axios.delete(`https://cscg-blog-search-service.herokuapp.com/delete_blog/${props.data.blog_id}`)
+        window.location.reload()
     }
+
     if (!deleteBlog){
-        return <div className="Blog flex overflow-hidden justify-center">{console.log(props.data)}
+        return <div className="Blog flex overflow-hidden justify-center">
              <img className="w-1/2" src={`https://api.dicebear.com/6.x/shapes/svg?shape1Color=0a5b83,1c799f,69d2e7&seed=${props.data.link}&backgroundColor=00FFAB,F2F0EB,1A6A52&shape1Color=00FFAB,F2F0EB,1A6A52&shape2Color=00FFAB,F2F0EB,1A6A52&shape3Color=00FFAB,F2F0EB,1A6A52&scale=200`} alt="logo"></img>
             <div className="p-1 text-center rounded-bl-sm absolute start-0 bottom-0 bg-colegio-green text-colegio-background font-sans font-bold w-1/2"> {props.data.tag} </div>
             <div className="Blog_container w-1/2 pt-1 pl-1 pb-4 pr-2 overflow-hidden h-full">
@@ -68,7 +71,7 @@ function Blog(props) {
             <div>
             <p className="mt-2 text-xl text-colegio-background font-bold p-2 text-center">Are you sure you want to delete this blog?</p>
             <div className="flex flex-row place-items-center justify-center h-1/2">
-                <button onClick={handleGoBack} className="m-2 bg-colegio-green-2 h-1/2 w-1/4 rounded-lg text-colegio-dark-green font-fold text-xl flex flex-row place-items-center justify-center">
+                <button onClick={handleGoBack} className="m-2 bg-colegio-green-2 h-1/2 p-1 w-1/4 rounded-lg text-colegio-dark-green font-fold text-xl flex flex-row place-items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="currentColor" className="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -76,7 +79,7 @@ function Blog(props) {
                     </svg>
 
                 </button>
-                <button  className=" h-1/2 w-1/4 m-2 bg-red-500 rounded-lg p-1 text-colegio-background border border-colegio-background flex flex-row place-items-center justify-center">
+                <button onClick={handleDelete}  className=" h-1/2 w-1/4 m-2 bg-red-500 rounded-lg p-1 text-colegio-background border border-colegio-background flex flex-row place-items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor" className="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
