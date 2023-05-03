@@ -1,16 +1,30 @@
 
 import Upvote from "../upvote/Upvote";
 import './Blog.css'
+import {AuthContext} from "../auth/AuthContext";
+import {useContext, useState} from "react";
 
 function Blog(props) {
+    const {currentUser} = useContext((AuthContext))
+    const [deleteBlog, setDeleteBlog] = useState(false);
 
     const handleButtonClick = () => {
         window.open(props.data.link, '_blank');
       };
 
-    return <div className="Blog flex overflow-hidden justify-center">
+    const handleDeleteOption = () => {
+        setDeleteBlog(true)
+    }
 
-            <img className=" w-1/2" src="mchine.jpg" alt="logo"></img>
+    const handleGoBack = () => {
+        setDeleteBlog(false)
+    }
+    const handleDelete = () => {
+        //Waiting for back end implementation
+    }
+    if (!deleteBlog){
+        return <div className="Blog flex overflow-hidden justify-center">{console.log(props.data)}
+              <img className=" w-1/2" src="mchine.jpg" alt="logo"></img>
             <div className="p-1 text-center rounded-bl-sm absolute start-0 bottom-0 bg-colegio-green text-colegio-background font-sans font-bold w-1/2"> {props.data.tag} </div>
             <div className="Blog_container w-1/2 overflow-hidden">
                 <div className="Blog_professor_container flex w-100 justify-center items-center">
@@ -35,8 +49,45 @@ function Blog(props) {
                     <button className="Blog_button rounded-lg font-bold" onClick={handleButtonClick}>
                         Read
                     </button>
+                    {currentUser.isProfessor && <button onClick={handleDeleteOption} className="bg-red-500 rounded-lg p-1 text-colegio-background border border-colegio-background">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" className="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/>
+                        </svg>
+                    </button>
+
+                    }
                 </div>
+
             </div>
+
         </div>
+    }else {
+        return <div className="Blog flex overflow-hidden justify-center">
+            <div>
+            <p className="mt-2 text-xl text-colegio-background font-bold p-2 text-center">Are you sure you want to delete this blog?</p>
+            <div className="flex flex-row place-items-center justify-center h-1/2">
+                <button onClick={handleGoBack} className="m-2 bg-colegio-green-2 h-1/2 w-1/4 rounded-lg text-colegio-dark-green font-fold text-xl flex flex-row place-items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" className="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"/>
+                    </svg>
+
+                </button>
+                <button  className=" h-1/2 w-1/4 m-2 bg-red-500 rounded-lg p-1 text-colegio-background border border-colegio-background flex flex-row place-items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" className="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/>
+                        </svg>
+                    </button>
+
+            </div>
+                </div>
+        </div>
+    }
+
 }
 export default Blog;
