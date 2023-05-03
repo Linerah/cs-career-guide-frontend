@@ -20,8 +20,10 @@ function Resource() {
     const [loading, setLoading] = useState(true);
     console.log(currentUser)
     const [researchs, setResearch] = useState([])
+
     const [selectedFile, setSelectedFile] = useState(null);
     const [base64String, setBase64String] = useState("");
+
     const handleResearchValues = (researchValues) => {
         setResearch(researchValues)
     }
@@ -61,11 +63,13 @@ function Resource() {
             console.log(error);
           });
       }, []);
+
     const [isModalOpen, setIsModalOpen] = useState(false); // This one is to simplify hiding carousel
     const [isBlogModalOpen, setIsBlogModalOpen] = useState(false);
     const [isResearchModalOpen, setIsResearchModalOpen] = useState(false);
 
     const handleOpenModal = (event) => {
+
         setIsModalOpen(true);
         if (event.currentTarget.name === 'blogModal'){
             setIsBlogModalOpen(true)
@@ -121,7 +125,7 @@ function Resource() {
             setBase64String(base64);
         }
         inputs['file'] = base64String
-        await axios.post("https://cscg-blog-search-service.herokuapp.com/create_blogcreate_research", inputs)
+        await axios.post("https://cscg-blog-search-service.herokuapp.com/create_research", inputs)
         setIsModalOpen(false);
         window.location.reload(false);
     }
@@ -327,7 +331,8 @@ function Resource() {
         <div className="Divider_Tittle">Research</div>
             <div className="Divider">
         </div>
-        <Search onResearch={handleResearchValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/research",resource: "research", options: [" ","Newest", "Oldest", "Most upvote", 'Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']}}/>
+
+        <Search onSection={handleResearchValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/research",resource: "research", options: [" ","Newest", "Oldest", "Most upvote", 'Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']}}/>
     </div>
 <div className={isModalOpen ? "opacity-70 flex relative justify-center research_height" : "opacity-100 flex relative justify-center research_height"}>
         <Swiper
@@ -343,7 +348,8 @@ function Resource() {
       >
             {researchs.map((research) => (
                 <SwiperSlide > <Research data={{title: research.title, information: research.information,
-                    link: research.link, research_id: research.research_id, tag: research.tag,  file: research.file}}/>
+                    link: research.link, research_id: research.research_id, tag: research.tag,  file: research.file, name: research.user_info[0].name}}/>
+
                 </SwiperSlide>
                 ))}
 
@@ -401,7 +407,7 @@ function Resource() {
         </div>
     </div>
 
- <div className={isModalOpen ? "opacity-70 flex relative justify-center research_height" : "opacity-100 flex relative justify-center research_height"}>
+ <div className={isModalOpen ? "opacity-70 flex relative justify-center org_height" : "opacity-100 flex relative justify-center org_height"}>
         <Swiper
         className={'flex justify-center '}
         slidesPerView={'auto'}
