@@ -407,7 +407,7 @@ function Resource() {
         </div>
     </div>
 
- <div className={isModalOpen ? "opacity-70 flex relative justify-center research_height" : "opacity-100 flex relative justify-center research_height"}>
+ <div className={isModalOpen ? "opacity-70 flex relative justify-center org_height" : "opacity-100 flex relative justify-center org_height"}>
         <Swiper
         className={'flex justify-center '}
         slidesPerView={'auto'}

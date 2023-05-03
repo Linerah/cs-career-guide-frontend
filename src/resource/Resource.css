@@ -97,6 +97,9 @@ color: #14C38E;
 .research_height{
     height: 33%
 }
+.org_height{
+    height: 25%
+}
 .swiper {
     width: 73% !important;
     /*height: 25% !important;*/
