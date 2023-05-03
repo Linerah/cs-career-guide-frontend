@@ -57,7 +57,7 @@ function Upvote(props) {
   }
   const buttonClass = isClicked ? 'clicked' : 'unclicked';
   return (
-    <button className={buttonClass} onClick={handleClick}>
+    <button className={buttonClass}  onClick={handleClick}>
       <span class="material-symbols-outlined"> 
 north
 </span> <div className=''>{upvotes}</div>

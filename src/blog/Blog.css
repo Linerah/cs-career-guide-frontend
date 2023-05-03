@@ -13,12 +13,11 @@
 .Blog_info_container{
     height: 50%;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 .Blog_professor_container {
-    height: 30%;
+    height: 20%;
 }
 .Blog_button_container {
     height: 20%;
@@ -43,7 +42,7 @@
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
-    line-height: 24px;
+    line-height: 30px;
 
     /* identical to box height, or 120% */
 
@@ -59,16 +58,16 @@
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 700;
-    font-size: 8px;
-    line-height: 24px;
+    font-size: 12px;
+    line-height: 10px;
     /* or 240% */
-
+    
     text-align: center;
     letter-spacing: 0.5px;
 
     color: #A2FFE0;
     padding: 0px 5px;
-    height: 70%;
+    height: 100%;
 
 
 }

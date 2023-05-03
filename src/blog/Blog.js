@@ -3,6 +3,8 @@ import Upvote from "../upvote/Upvote";
 import './Blog.css'
 import {AuthContext} from "../auth/AuthContext";
 import {useContext, useState} from "react";
+import Tooltip from '@mui/material/Tooltip';
+import Button from '@mui/material/Button';
 
 function Blog(props) {
     const {currentUser} = useContext((AuthContext))
@@ -27,26 +29,24 @@ function Blog(props) {
              <img className="w-1/2" src={`https://api.dicebear.com/6.x/shapes/svg?shape1Color=0a5b83,1c799f,69d2e7&seed=${props.data.link}&backgroundColor=00FFAB,F2F0EB,1A6A52&shape1Color=00FFAB,F2F0EB,1A6A52&shape2Color=00FFAB,F2F0EB,1A6A52&shape3Color=00FFAB,F2F0EB,1A6A52&scale=200`} alt="logo"></img>
             <div className="p-1 text-center rounded-bl-sm absolute start-0 bottom-0 bg-colegio-green text-colegio-background font-sans font-bold w-1/2"> {props.data.tag} </div>
             <div className="Blog_container w-1/2 pt-1 pl-1 pb-4 pr-2 overflow-hidden h-full">
-                <div className="mr-auto Blog_professor_container flex justify-center items-center">
+                <Tooltip class="mr-auto pt-2 flex justify-center items-center" title={`Prof. ${props.data.name}`}>
                     <div className="profile_gradient rounded-full p-0.5 flex justify-center items-center">
                         <div className="rounded-full p-0.2 bg-white flex justify-center items-center">
                             <img className="h-7" src={`https://api.dicebear.com/5.x/adventurer/svg?seed=${props.data.name}`} alt="profile"/>
 
                         </div>
                     </div>
-
-                    <h1 className="Blog_information flex items-center">
-                       Prof. {props.data.name}
-                    </h1>
-                </div>
-                <div className="Blog_info_container ">
+                </Tooltip>
+                <div className=" Blog_professor_container flex w-full justify-center items-center">
                     <div><h1 className="Blog_tittle">{props.data.title}
                     </h1></div>
-                    <div><h2 className="Blog_information overflow-hidden">{props.data.information}</h2></div>
+                </div>
+                <div className="Blog_info_container ">
+                    <h2 className="Blog_information overflow-hidden">{props.data.information}</h2>
                 </div>
                 <div className="Blog_button_container space-x-3">
                     <Upvote  key={`${props.data.blog_id}_${props.data.upvote}`} data={{blog_id: props.data.blog_id, upvote: props.data.upvote}}/>
-                    <button className="Blog_button rounded-lg font-bold" onClick={handleButtonClick}>
+                    <button className="Blog_button rounded-lg font-bold transition delay-300 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105" onClick={handleButtonClick}>
                         Read
                     </button>
                     {currentUser.isProfessor && <button onClick={handleDeleteOption} className="bg-red-500 rounded-lg p-1 text-colegio-background border border-colegio-background">
