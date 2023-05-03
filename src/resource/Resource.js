@@ -125,7 +125,7 @@ function Resource() {
             setBase64String(base64);
         }
         inputs['file'] = base64String
-        await axios.post("https://cscg-blog-search-service.herokuapp.com/create_blogcreate_research", inputs)
+        await axios.post("https://cscg-blog-search-service.herokuapp.com/create_research", inputs)
         setIsModalOpen(false);
         window.location.reload(false);
     }
