@@ -25,11 +25,11 @@ function Search(props) {
         e.preventDefault();
         let resource = props.data.resource;
         try {
-            if (resource.equals("blogs")){
+            if (resource === "blogs"){
                 const response = await axios.post(props.data.route, {"blog-filter": category, "blog-title": text, "user_id": currentUser._id});
             props.onSection(response.data);
             }
-            if (resource.equals("research")){
+            else if(resource === "research"){
                 const response = await axios.post(props.data.route, {"research-filter": category, "research-title": text, "user_id": currentUser._id});
             props.onSection(response.data);
             }
@@ -64,10 +64,11 @@ function Search(props) {
                         <option value={value}>{value}</option>
                     ))}
                 </select>
-                <div class="rounded-full" id="submit">
-                <input class="cursor-pointer rounded-r-lg font-bold Search_button" type="submit" value="Search" onClick={handleItems}>
-                </input>
+            <div className="rounded-full" id="submit" onClick={handleItems}>
+                 <div className="cursor-pointer rounded-r-lg font-bold Search_button flex justify-center items-center">
+                    <span className="material-symbols-outlined">search</span>
                 </div>
+            </div>
             </div>
     </>
 }
