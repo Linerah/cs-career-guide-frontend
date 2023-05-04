@@ -52,7 +52,7 @@ function Search(props) {
                     </input>
                 </div>
 
-                <select value={category} onChange={handleChangeCategory} class="w-20 Dropdown_Search">
+                <select value={category} onChange={handleChangeCategory} class="w-20 Dropdown_Search ">
                     {props.data.options.map((value) => (
                         <option value={value}>{value}</option>
                     ))}

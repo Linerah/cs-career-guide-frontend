@@ -19,6 +19,8 @@ function Resource() {
     const profChoices = ['Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']
     const {currentUser} = useContext((AuthContext))
     const [loading, setLoading] = useState(true);
+    const [loadingOrg, setLoadingOrg] = useState(true);
+    const [loadingResearch, setLoadingResearch] = useState(true);
     const [researchs, setResearch] = useState([]);
     const [organizations, setOrganization] = useState([]);
 
@@ -59,6 +61,7 @@ function Resource() {
           })
           .then(response => {
             setResearch(response.data);
+            setLoadingResearch(false)
           })
           .catch(error => {
             console.log(error);
@@ -73,7 +76,7 @@ function Resource() {
           .then(response => {
             console.log(response.data)
             setOrganization(response.data);
-            setLoading(false);
+            setLoadingOrg(false);
           })
           .catch(error => {
             console.log(error);
@@ -185,7 +188,16 @@ function Resource() {
        <Search onSection={handleBlogValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/blogs",resource: "blogs", options: [" ","Newest", "Oldest", "Most upvote", 'Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']}}/>
     </div>
 <div className={isModalOpen ? "opacity-70 flex relative justify-center blog_height" : "opacity-100 flex relative justify-center blog_height"}>
-    <Swiper
+   
+{loading ?
+        <div className="flex justify-center items-center">
+             <div className="flex justify-center">
+          <div className="w-11 h-11 border-4 border-gray-300 rounded-full spinner"></div>
+        </div>
+      
+      </div>
+            
+        : <Swiper
         className={'flex justify-center'}
         slidesPerView={'auto'}
         spaceBetween={0}
@@ -196,123 +208,7 @@ function Resource() {
         nextEl: '.swiper-button-next',
       }}
       >
-        {loading ?
-            <div>
-              <SwiperSlide > 
-            <div class="Blog flex overflow-hidden justify-center">
-            <div className="w-1/2 animate-pulse bg-colegio-light-green"></div>
-            <div className="p-1 text-center rounded-bl-sm absolute start-0 bottom-0 bg-colegio-green text-colegio-background font-sans font-bold w-1/2 h-7 flex items-center justify-center"> 
-                <div class="animate-pulse h-2 bg-white rounded w-1/2"></div>
-            </div>
-            <div className="animate-pulse Blog_container w-1/2 overflow-hidden">
-                <div className="Blog_professor_container flex w-100 justify-center items-center">
-                    <div className="profile_gradient mr-auto rounded-full p-0.5 flex justify-center items-center">
-                        <div className="rounded-full p-0.2 bg-white flex justify-center items-center">
-                            <div class="rounded-full bg-white h-10 w-10"></div>
-                        </div>
-
-                    </div>
-                    <div class="h-2 bg-colegio-light-green rounded w-1/6"></div>
-                
-                </div>
-                <div class="loading_blog_info_container space-y-2 items-center">
-                    <div class="h-2 bg-white rounded w-1/2 "></div>
-                    <div class="w-full flex justify-center items-center flex-col space-y-1">
-                        <div class="h-2 bg-colegio-light-green rounded w-3/5 "></div>
-                        <div class="h-2 bg-colegio-light-green rounded w-3/5 "></div>
-                        <div class="h-2 bg-colegio-light-green rounded w-3/5 "></div>
-                    </div>  
-                </div>
-                <div className="Blog_button_container space-x-3">
-                    <button className="loading_upvote h-2/3">
-                        
-                    </button>
-                    <button className="Blog_button rounded-lg font-bold h-2/3">
-                
-                    </button>
-                   
-                </div>
-            </div>
-            </div>
-            </SwiperSlide > 
-            <SwiperSlide > 
-            <div class="Blog flex overflow-hidden justify-center">
-            <div className="w-1/2 animate-pulse bg-colegio-light-green"></div>
-            <div className="p-1 text-center rounded-bl-sm absolute start-0 bottom-0 bg-colegio-green text-colegio-background font-sans font-bold w-1/2 h-7 flex items-center justify-center"> 
-                <div class="animate-pulse h-2 bg-white rounded w-1/2"></div>
-            </div>
-            <div className="animate-pulse Blog_container w-1/2 overflow-hidden">
-                <div className="Blog_professor_container flex w-100 justify-center items-center">
-                    <div className="profile_gradient mr-auto rounded-full p-0.5 flex justify-center items-center">
-                        <div className="rounded-full p-0.2 bg-white flex justify-center items-center">
-                            <div class="rounded-full bg-white h-10 w-10"></div>
-                        </div>
-
-                    </div>
-                    <div class="h-2 bg-colegio-light-green rounded w-1/6"></div>
-                
-                </div>
-                <div class="loading_blog_info_container space-y-2 items-center">
-                    <div class="h-2 bg-white rounded w-1/2 "></div>
-                    <div class="w-full flex justify-center items-center flex-col space-y-1">
-                        <div class="h-2 bg-colegio-light-green rounded w-3/5 "></div>
-                        <div class="h-2 bg-colegio-light-green rounded w-3/5 "></div>
-                        <div class="h-2 bg-colegio-light-green rounded w-3/5 "></div>
-                    </div>  
-                </div>
-                <div className="Blog_button_container space-x-3">
-                    <button className="loading_upvote h-2/3">
-                        
-                    </button>
-                    <button className="Blog_button rounded-lg font-bold h-2/3">
-                
-                    </button>
-                   
-                </div>
-            </div>
-            </div>
-            </SwiperSlide > 
-            <SwiperSlide > 
-            <div class="Blog flex overflow-hidden justify-center">
-            <div className="w-1/2 animate-pulse bg-colegio-light-green"></div>
-            <div className="p-1 text-center rounded-bl-sm absolute start-0 bottom-0 bg-colegio-green text-colegio-background font-sans font-bold w-1/2 h-7 flex items-center justify-center"> 
-                <div class="animate-pulse h-2 bg-white rounded w-1/2"></div>
-            </div>
-            <div className="animate-pulse Blog_container w-1/2 overflow-hidden">
-                <div className="Blog_professor_container flex w-100 justify-center items-center">
-                    <div className="profile_gradient mr-auto rounded-full p-0.5 flex justify-center items-center">
-                        <div className="rounded-full p-0.2 bg-white flex justify-center items-center">
-                            <div class="rounded-full bg-white h-10 w-10"></div>
-                        </div>
-
-                    </div>
-                    <div class="h-2 bg-colegio-light-green rounded w-1/6"></div>
-                
-                </div>
-                <div class="loading_blog_info_container space-y-2 items-center">
-                    <div class="h-2 bg-white rounded w-1/2 "></div>
-                    <div class="w-full flex justify-center items-center flex-col space-y-1">
-                        <div class="h-2 bg-colegio-light-green rounded w-3/5 "></div>
-                        <div class="h-2 bg-colegio-light-green rounded w-3/5 "></div>
-                        <div class="h-2 bg-colegio-light-green rounded w-3/5 "></div>
-                    </div>  
-                </div>
-                <div className="Blog_button_container space-x-3">
-                    <button className="loading_upvote h-2/3">
-                        
-                    </button>
-                    <button className="Blog_button rounded-lg font-bold h-2/3">
-                
-                    </button>
-                   
-                </div>
-            </div>
-            </div>
-            </SwiperSlide > 
-            
-          
-            </div>
-            : blogs.map((blog) => (
+        { blogs.map((blog) => (
             currentUser.isProfessor ?
                 (currentUser._id === blog.user_info[0]._id ?
                <SwiperSlide > <Blog data={{title: blog.title, information: blog.information, link: blog.link, blog_id: blog.blog_id, upvote: blog.upvote, tag: blog.tag, name: blog.user_info[0].name}}/></SwiperSlide> :
@@ -321,7 +217,7 @@ function Resource() {
                 ))
         }
       </Swiper>
-
+}
         {currentUser.isProfessor && <button name="blogModal" className="m-auto absolute top-24 right-20 bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
         </svg></button>}
@@ -378,6 +274,15 @@ function Resource() {
         <Search onSection={handleResearchValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/research",resource: "research", options: [" ","Newest", "Oldest", "Most upvote", 'Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']}}/>
     </div>
 <div className={isModalOpen ? "opacity-70 flex relative justify-center research_height" : "opacity-100 flex relative justify-center research_height"}>
+{loadingResearch ?
+        <div className="flex justify-center items-center">
+             <div className="flex justify-center">
+          <div className="w-11 h-11 border-4 border-gray-300 rounded-full spinner"></div>
+        </div>
+      
+      </div>
+            
+        :
         <Swiper
         className={'flex justify-center '}
         slidesPerView={'auto'}
@@ -397,6 +302,7 @@ function Resource() {
                 ))}
 
       </Swiper>
+}
     {currentUser.isProfessor && <button name="researchModal" className="m-auto absolute top-24 right-20 bg-colegio-light-green text-colegio-background rounded-full h-12 w-12" onClick={handleOpenModal}><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
         </svg></button>}
@@ -451,6 +357,15 @@ function Resource() {
     </div>
             <Search onSection={handleOrganizationValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/research",resource: "organization", options: []}}/>
  <div className={isModalOpen ? "opacity-70 flex relative justify-center org_height" : "opacity-100 flex relative justify-center org_height"}>
+ {loadingOrg ?
+        <div className="flex justify-center items-center">
+             <div className="flex justify-center">
+          <div className="w-11 h-11 border-4 border-gray-300 rounded-full spinner"></div>
+        </div>
+      
+      </div>
+            
+        :
         <Swiper
         className={'flex justify-center '}
         slidesPerView={'auto'}
@@ -470,6 +385,7 @@ function Resource() {
                 </SwiperSlide>
                 ))}
       </Swiper>
+}
     </div>
         </div>
     </>
