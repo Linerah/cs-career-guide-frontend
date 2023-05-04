@@ -12,15 +12,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import {AuthContext} from "../auth/AuthContext";
 import Blog from "../blog/Blog"
 import Research from "../research/research"
-// import Organization from "../organization/organization"
+import Organization from "../organization/organization"
+
 
 function Resource() {
     const profChoices = ['Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']
     const {currentUser} = useContext((AuthContext))
     const [loading, setLoading] = useState(true);
-    console.log(currentUser)
     const [researchs, setResearch] = useState([]);
     const [organizations, setOrganization] = useState([]);
+
+
     const [selectedFile, setSelectedFile] = useState(null);
     const [base64String, setBase64String] = useState(null);
     const [fileUploaded, setFileUploaded] = useState(false)
@@ -28,8 +30,6 @@ function Resource() {
         setResearch(researchValues)
     }
         const handleOrganizationValues = (organizationValues) => {
-        console.log('hereugsdigasdfgyudfsguiuiogasdfguioasdfguiadguidfguiasdfguiasdguioasdguiasdfguiadguioguiooguioasdf')
-        console.log(organizationValues)
         setOrganization(organizationValues)
     }
     const [blogs, setBlogs] = useState([]);
@@ -119,28 +119,55 @@ function Resource() {
 
     }
     const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
+        setFileUploaded(false); //In case of uploading a file then changing it
+
+        const uploadedFile = event.target.files[0];
+        setSelectedFile(uploadedFile);
+
+        const reader = new FileReader();
+        reader.onload = () => {
+
+                console.log("File uploaded successfully");
+                setFileUploaded(true);
+            };
+        reader.readAsDataURL(uploadedFile);
+        console.log(uploadedFile);
+        setSelectedFile(uploadedFile);
+        };
+
 
     async function handleResearchSubmit(event) {
         let inputs = {}
         event.preventDefault()
-
+        console.log(selectedFile);
         const formData = new FormData(event.target);
         for (const [key, value] of formData.entries()) {
             inputs[key] = value;
         }
 
-        inputs['user_id'] = currentUser._id
+        inputs['user_id'] = currentUser._id;
+        const fileBlob = selectedFile
+        const reader = new FileReader();
 
-        const file = selectedFile
-        const reader = new FileReader()
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            const base64 = reader.result.replace("data:application/pdf;base64,","");
-            setBase64String(base64);
-        }
-        inputs['file'] = base64String
+
+        //reader.onload = () => {
+        //    console.log(1);
+        //    console.log(reader.result)
+        //    const base64 = reader.result.replace("data:application/pdf;base64,", "");
+        //    console.log(base64)
+        //    inputs['file'] = base64
+            //setBase64String(base64);
+            //console.log(base64String);
+        //}
+        await new Promise((resolve) => {
+            reader.readAsDataURL(fileBlob);
+            reader.onload = () => {
+                const base64 = reader.result.replace("data:application/pdf;base64,", "");
+                inputs['file'] = base64;
+                resolve(true);
+            };
+
+    });
         await axios.post("https://cscg-blog-search-service.herokuapp.com/create_research", inputs)
         setIsModalOpen(false);
         window.location.reload(false);
@@ -432,7 +459,7 @@ function Resource() {
         pagination={{ clickable: true }}
         navigation={{
         prevEl: '.swiper-button-prev',
-        nextEl: '.swiper-button-next',
+        nextEl: '.swiper-button-next'
       }}
 
 
