@@ -12,7 +12,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import {AuthContext} from "../auth/AuthContext";
 import Blog from "../blog/Blog"
 import Research from "../research/research"
-import Organization from "../organization/organization"
 // import Organization from "../organization/organization"
 
 function Resource() {
@@ -23,8 +22,8 @@ function Resource() {
     const [researchs, setResearch] = useState([]);
     const [organizations, setOrganization] = useState([]);
     const [selectedFile, setSelectedFile] = useState(null);
-    const [base64String, setBase64String] = useState("");
-
+    const [base64String, setBase64String] = useState(null);
+    const [fileUploaded, setFileUploaded] = useState(false)
     const handleResearchValues = (researchValues) => {
         setResearch(researchValues)
     }
@@ -45,7 +44,6 @@ function Resource() {
             }
           })
           .then(response => {
-            console.log(response.data)
             setBlogs(response.data);
             setLoading(false);
           })
@@ -60,7 +58,6 @@ function Resource() {
             }
           })
           .then(response => {
-            console.log(response.data)
             setResearch(response.data);
           })
           .catch(error => {
@@ -416,7 +413,7 @@ function Resource() {
                   <input
                       id="file" type="file" accept=".pdf" className="block w-full text-lg bg-colegio-green border border-colegio-background rounded-lg cursor-pointer text-colegio-background focus:outline-none placeholder-blue-700 "
                        onChange={handleFileChange}/>
-                  <button className="mt-2 bg-colegio-green-2 text-colegio-dark-green font-sans font-bold rounded-lg p-2 float-right" type="submit" value="Submit" > Submit </button>
+                  <button disabled={!fileUploaded} className="disabled:opacity-25 mt-2 bg-colegio-green-2 text-colegio-dark-green font-sans font-bold rounded-lg p-2 float-right" type="submit" value="Submit" > Submit </button>
               </div>
         </form>
       </Modal>
@@ -435,7 +432,7 @@ function Resource() {
         pagination={{ clickable: true }}
         navigation={{
         prevEl: '.swiper-button-prev',
-        nextEl: '.swiper-button-next'
+        nextEl: '.swiper-button-next',
       }}
 
 
