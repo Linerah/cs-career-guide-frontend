@@ -21,7 +21,6 @@ function Resource() {
     const [loading, setLoading] = useState(true);
     const [researchs, setResearch] = useState([]);
     const [organizations, setOrganization] = useState([]);
-    const [researchs, setResearch] = useState([])
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [base64String, setBase64String] = useState(null);
