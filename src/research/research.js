@@ -13,7 +13,8 @@ function Research(props){
         window.open(props.data.link, '_blank')
     }
     const handleApplyClick = () => {
-
+        const open = props.handleClick(props.data)
+        console.log(props.data.research_id)
     }
 
     // this is going to break
@@ -80,7 +81,7 @@ function Research(props){
                     <button className="Research_button rounded-lg font-bold w-1/3  float-right flex justify-center items-center transition delay-300 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105" onClick={handleInfoClick}>
                         <span className="material-symbols-outlined">open_in_new</span>
                     </button>
-                    <button className="Research_Apply_button rounded-lg font-bold  flex justify-center items-center transition delay-300 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105" onClick={handleApplyClick}>
+                    <button name={props.data.research_id} className="Research_Apply_button rounded-lg font-bold  flex justify-center items-center transition delay-300 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105" onClick={props.handleClick}>
                         Apply
                     </button>
                     {currentUser.isProfessor && <button onClick={handleDeleteOption} className="bg-red-500 rounded-lg p-1 text-colegio-background border border-colegio-background">
