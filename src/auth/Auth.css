@@ -27,6 +27,7 @@
 .Login_button {
     background-color: #00FFAB;
     color: #1A6A52;
+    margin: 0;
     padding: 5px 50px;
 }
 
@@ -63,6 +64,7 @@
 .Register_button {
     background-color: #00FFAB;
     color: #1A6A52;
+    margin: 0;
     padding: 5px 50px;
 }
 

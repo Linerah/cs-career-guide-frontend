@@ -13,7 +13,7 @@ import {AuthContext} from "../auth/AuthContext";
 import Blog from "../blog/Blog"
 import Research from "../research/research"
 import Organization from "../organization/organization"
-// import Organization from "../organization/organization"
+
 
 function Resource() {
     const profChoices = ['Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']
@@ -22,6 +22,7 @@ function Resource() {
     const [researchs, setResearch] = useState([]);
     const [organizations, setOrganization] = useState([]);
 
+
     const [selectedFile, setSelectedFile] = useState(null);
     const [base64String, setBase64String] = useState(null);
     const [fileUploaded, setFileUploaded] = useState(false)
@@ -29,8 +30,6 @@ function Resource() {
         setResearch(researchValues)
     }
         const handleOrganizationValues = (organizationValues) => {
-        console.log('hereugsdigasdfgyudfsguiuiogasdfguioasdfguiadguidfguiasdfguiasdguioasdguiasdfguiadguioguiooguioasdf')
-        console.log(organizationValues)
         setOrganization(organizationValues)
     }
     const [blogs, setBlogs] = useState([]);
