@@ -28,14 +28,20 @@ function Blog(props) {
     if (!deleteBlog){
         return <div className="Blog flex overflow-hidden justify-center">
              <img className="w-1/2" src={`https://api.dicebear.com/6.x/shapes/svg?shape1Color=0a5b83,1c799f,69d2e7&seed=${props.data.link}&backgroundColor=00FFAB,F2F0EB,1A6A52&shape1Color=00FFAB,F2F0EB,1A6A52&shape2Color=00FFAB,F2F0EB,1A6A52&shape3Color=00FFAB,F2F0EB,1A6A52&scale=200`} alt="logo"></img>
-            <div className="p-1 text-center rounded-bl-sm absolute start-0 bottom-0 bg-colegio-green text-colegio-background font-sans font-bold w-1/2"> {props.data.tag} </div>
+            <div className="p-1 text-sm text-center rounded-bl-sm absolute start-0 bottom-0 bg-colegio-green text-colegio-background font-sans font-bold w-1/2"> {props.data.tag} </div>
             <div className="Blog_container w-1/2 pt-1 pl-1 pb-4 pr-2 overflow-hidden h-full">
-                    <div className="profile_gradient rounded-full p-0.5 flex justify-center items-center">
+                <div className="flex items-center mt-3">
+                    <div className="Blog_profile_gradient rounded-full p-0.5 flex justify-center items-center">
                         <div className="rounded-full p-0.2 bg-white flex justify-center items-center">
                             <img className="h-7" src={`https://api.dicebear.com/5.x/adventurer/svg?seed=${props.data.name}`} alt="profile"/>
 
                         </div>
                     </div>
+                    <h1 className="Research_information flex items-center">
+                        Prof. {props.data.name}
+                    </h1>
+                </div>
+                    
                 <div className=" Blog_professor_container flex w-full justify-center items-center">
                     <div><h1 className="Blog_tittle">{props.data.title}
                     </h1></div>

@@ -17,7 +17,7 @@ function Organization(props){
             <div className="Organization_container w-1/2">
                 <h2 className="Organization_information font-bold">{props.data.info}</h2>
                 <div className="Organization_button_container pt-4">
-                    <button className="Organization_button rounded-lg font-bold" onClick={handleClick}>
+                    <button className="Organization_button rounded-lg font-bold transition delay-300 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105" onClick={handleClick}>
                         Join Now!
                     </button>
                 </div>
