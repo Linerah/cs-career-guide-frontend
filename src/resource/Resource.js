@@ -86,7 +86,7 @@ function Resource() {
     const [isModalOpen, setIsModalOpen] = useState(false); // This one is to simplify hiding carousel
     const [isBlogModalOpen, setIsBlogModalOpen] = useState(false);
     const [isResearchModalOpen, setIsResearchModalOpen] = useState(false);
-
+    const [isApplyModalOpen, setIsApplyModalOpen] = useState(false)
     const handleOpenModal = (event) => {
 
         setIsModalOpen(true);
@@ -94,12 +94,17 @@ function Resource() {
             setIsBlogModalOpen(true)
         }else if (event.currentTarget.name === 'researchModal'){
             setIsResearchModalOpen(true)
+        }else{
+            console.log(event.currentTarget.name)
+            setIsApplyModalOpen(true);
         }
     };
 
     const handleCloseModal = () => {
+        console.log(1)
         setIsBlogModalOpen(false);
         setIsResearchModalOpen(false);
+        setIsApplyModalOpen(false);
         setIsModalOpen(false);
     };
 
@@ -262,6 +267,8 @@ function Resource() {
               </div>
         </form>
       </Modal>
+
+
 </div>
 
 
@@ -295,7 +302,7 @@ function Resource() {
       }}
       >
             {researchs.map((research) => (
-                <SwiperSlide > <Research data={{title: research.title, information: research.information,
+                <SwiperSlide > <Research handleClick={handleOpenModal} data={{title: research.title, information: research.information,
                     link: research.link, research_id: research.research_id, tag: research.tag,  file: research.file, name: research.user_info[0].name}}/>
 
                 </SwiperSlide>
@@ -350,6 +357,16 @@ function Resource() {
               </div>
         </form>
       </Modal>
+
+    {/* Modal for Apply */}
+
+        <Modal isOpen={isApplyModalOpen} onClose={handleCloseModal}>
+
+        <p>A</p>
+
+        </Modal>
+
+
         <div className="flex justify-center divider_container">
         <div className="Divider_Tittle">Organizations</div>
             <div className="Divider_Organization">
