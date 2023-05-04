@@ -33,6 +33,10 @@ function Search(props) {
                 const response = await axios.post(props.data.route, {"research-filter": category, "research-title": text, "user_id": currentUser._id});
             props.onSection(response.data);
             }
+            else if(resource === "organization"){
+                const response = await axios.get(props.data.route)
+                props.onSection(response.data);
+            }
 
 
         } catch (err) {
@@ -40,25 +44,14 @@ function Search(props) {
         }
     };
 
-    const handleResearchItems = async (e) => {
-        e.preventDefault();
-
-        try {
-            const response = await axios.post(props.data.route, {"research-filter": category, "research-title": text, "user_id": currentUser._id});
-            props.onResearch(response.data);
-
-        } catch (err) {
-            console.log(err.response.data);
-        }
-    };
-
-    return <>
+    if (props.data.resource !== "organization"){
+        return <>
     <div class="flex ml-8" id="search-input">
                 <div  id="doctor-name">
                     <input value={text} onChange={handleChangeText} class="style:none h-7 w-36 Text_Search" placeholder={"Search " + props.data.resource + "..."} type="search">
                     </input>
                 </div>
-         
+
                 <select value={category} onChange={handleChangeCategory} class="w-20 Dropdown_Search">
                     {props.data.options.map((value) => (
                         <option value={value}>{value}</option>
@@ -70,6 +63,9 @@ function Search(props) {
                 </div>
             </div>
             </div>
+    </>
+    }
+    return <>
     </>
 }
 export default Search;

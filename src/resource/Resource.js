@@ -12,12 +12,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import {AuthContext} from "../auth/AuthContext";
 import Blog from "../blog/Blog"
 import Research from "../research/research"
+import Organization from "../organization/organization"
 // import Organization from "../organization/organization"
 
 function Resource() {
     const profChoices = ['Programming Languages', 'Data Structures', 'Computer Architecture', 'Computer Networks', 'Cybersecurity', 'Databases', 'Software Engineering', 'Human/Computer Interaction', 'Artificial Intelligence']
     const {currentUser} = useContext((AuthContext))
     const [loading, setLoading] = useState(true);
+    const [researchs, setResearch] = useState([]);
+    const [organizations, setOrganization] = useState([]);
     const [researchs, setResearch] = useState([])
 
     const [selectedFile, setSelectedFile] = useState(null);
@@ -25,6 +28,11 @@ function Resource() {
     const [fileUploaded, setFileUploaded] = useState(false)
     const handleResearchValues = (researchValues) => {
         setResearch(researchValues)
+    }
+        const handleOrganizationValues = (organizationValues) => {
+        console.log('hereugsdigasdfgyudfsguiuiogasdfguioasdfguiadguidfguiasdfguiasdguioasdguiasdfguiadguioguiooguioasdf')
+        console.log(organizationValues)
+        setOrganization(organizationValues)
     }
     const [blogs, setBlogs] = useState([]);
     const handleBlogValues = (blogValues) => {
@@ -53,6 +61,21 @@ function Resource() {
           })
           .then(response => {
             setResearch(response.data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }, []);
+     useEffect(() => {
+        axios.get('https://cscg-blog-search-service.herokuapp.com/get_organization', {
+            params: {
+              "user_id": currentUser._id
+            }
+          })
+          .then(response => {
+            console.log(response.data)
+            setOrganization(response.data);
+            setLoading(false);
           })
           .catch(error => {
             console.log(error);
@@ -428,7 +451,7 @@ function Resource() {
             <div className="Divider">
         </div>
     </div>
-
+            <Search onSection={handleOrganizationValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/research",resource: "organization", options: []}}/>
  <div className={isModalOpen ? "opacity-70 flex relative justify-center org_height" : "opacity-100 flex relative justify-center org_height"}>
         <Swiper
         className={'flex justify-center '}
@@ -438,15 +461,16 @@ function Resource() {
         pagination={{ clickable: true }}
         navigation={{
         prevEl: '.swiper-button-prev',
-        nextEl: '.swiper-button-next',
+        nextEl: '.swiper-button-next'
       }}
 
-      >
-            <SwiperSlide><Organization /></SwiperSlide>
-            <SwiperSlide><Organization /></SwiperSlide>
-            <SwiperSlide><Organization /></SwiperSlide>
-            <SwiperSlide><Organization /></SwiperSlide>
 
+      >
+            {organizations.map((organization) => (
+                <SwiperSlide > <Organization data={{title: organization.title, info: organization.info,
+                    link: organization.link, logo_url: organization.logo_url, logo_name: organization.logo_name}}/>
+                </SwiperSlide>
+                ))}
       </Swiper>
     </div>
         </div>
@@ -455,22 +479,3 @@ function Resource() {
 export default Resource;
 
 
-function Organization(){
-    return <div className="Organization flex overflow-hidden justify-center">
-            <div className="Organzation_container"> 
-               <div className="Organization_logo rounded-full h-full" >
-                    <img className="p-4 w-24 h-24" src="IEEE_logo.png" alt="logo"></img>
-                </div> 
-                <h1 className="Organization_tittle">IEE Organization</h1>
-            </div>    
-            <div className="Organzation_container w-1/2">
-                <h2 className="Organization_information font-bold">The professional home for the engineering and technology community worldwide</h2>
-                <div className="Organzation_button_container pt-4">
-                    <button className="Organzation_button rounded-lg font-bold">
-                        Join Now!
-                    </button>
-                </div>
-            </div>
-        </div>
-
-}
