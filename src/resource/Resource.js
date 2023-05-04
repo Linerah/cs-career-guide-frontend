@@ -446,7 +446,7 @@ function Resource() {
       </Modal>
         <div className="flex justify-center divider_container">
         <div className="Divider_Tittle">Organizations</div>
-            <div className="Divider">
+            <div className="Divider_Organization">
         </div>
     </div>
             <Search onSection={handleOrganizationValues} data={{route: "https://cscg-blog-search-service.herokuapp.com/research",resource: "organization", options: []}}/>

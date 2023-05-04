@@ -132,6 +132,15 @@ color: #14C38E;
     margin-top: 12px;
 
 }
+.Divider_Organization {
+    width: 70%;
+    height: 0px;
+
+    border: 1px solid #14C38E;
+    margin-left: 2%;
+    margin-top: 12px;
+
+}
 
 .Divider_Tittle {
     display: flex;
