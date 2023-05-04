@@ -40,6 +40,8 @@ function Login(){
     // this method will be use to handle any changes to the input in the login form
     const handleChange = (e) => {
         console.log(inputs)
+        setErr("");
+        setFormError('');
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
@@ -133,6 +135,8 @@ function Register(){
 
     const handleChange = (e) => {
         console.log(inputs)
+        setErr("");
+        setFormError('');
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
