@@ -319,12 +319,18 @@ function Resource() {
       }}
       >
             {researchs.map((research) => (
-
-                <SwiperSlide > <Research handleClick={handleOpenApply} data={{title: research.title, information: research.information,
+                currentUser.isProfessor ?
+                (currentUser._id === research.user_info[0]._id ?
+               <SwiperSlide > <Research handleClick={handleOpenApply} data={{title: research.title, information: research.information,
                     link: research.link, research_id: research.research_id, tag: research.tag,  file: research.file, name: research.user_info[0].name, email: research.user_info[0].email}}/>
-
+                </SwiperSlide>:
+               null) : <SwiperSlide > <Research handleClick={handleOpenApply} data={{title: research.title, information: research.information,
+                    link: research.link, research_id: research.research_id, tag: research.tag,  file: research.file, name: research.user_info[0].name, email: research.user_info[0].email}}/>
                 </SwiperSlide>
-                ))}
+
+                )
+
+                )})}
 
       </Swiper>
 }
