@@ -167,7 +167,7 @@ function Resource() {
 
     });
 
-        //await axios.post(`https://cs-career-guide-email-service.herokuapp.com/research`, input);
+        await axios.post(`https://cs-career-guide-email-service.herokuapp.com/research`, input);
         setIsResumeSent(true);
     }
 
