@@ -28,6 +28,7 @@ function Resource() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [base64String, setBase64String] = useState(null);
     const [fileUploaded, setFileUploaded] = useState(false)
+    const [profData, setProfData] = useState({})
     const handleResearchValues = (researchValues) => {
         setResearch(researchValues)
     }
@@ -87,16 +88,19 @@ function Resource() {
     const [isBlogModalOpen, setIsBlogModalOpen] = useState(false);
     const [isResearchModalOpen, setIsResearchModalOpen] = useState(false);
     const [isApplyModalOpen, setIsApplyModalOpen] = useState(false)
-    const handleOpenModal = (event) => {
+    const handleOpenApply = (info) => {
+        setIsModalOpen(true);
+        console.log(info)
+        setIsApplyModalOpen(true);
+        setProfData(info)
+    };
 
+    const handleOpenModal = (event) => {
         setIsModalOpen(true);
         if (event.currentTarget.name === 'blogModal'){
             setIsBlogModalOpen(true)
         }else if (event.currentTarget.name === 'researchModal'){
             setIsResearchModalOpen(true)
-        }else{
-            console.log(event.currentTarget.name)
-            setIsApplyModalOpen(true);
         }
     };
 
@@ -143,6 +147,30 @@ function Resource() {
         setSelectedFile(uploadedFile);
         };
 
+    async function handleApplySubmit(event) {
+        let input = {}
+        const fileBlob = selectedFile
+        const reader = new FileReader();
+        await new Promise((resolve) => {
+            reader.readAsDataURL(fileBlob);
+            reader.onload = () => {
+                const base64 = reader.result.replace("data:application/pdf;base64,", "");
+                input['resume'] = base64
+                resolve(true);
+            };
+            input['research_title'] = profData['title']
+            input['student_email'] = currentUser.email
+            input['student_name'] = currentUser.name
+            input['professor_email'] = profData['email']
+            input['professor_name'] = profData['name']
+
+
+    });
+        console.log(input)
+        await axios.post(`https://cs-career-guide-email-service.herokuapp.com/research`, input);
+        setIsApplyModalOpen(false);
+        setIsModalOpen(false);
+    }
 
     async function handleResearchSubmit(event) {
         let inputs = {}
@@ -156,17 +184,6 @@ function Resource() {
         inputs['user_id'] = currentUser._id;
         const fileBlob = selectedFile
         const reader = new FileReader();
-
-
-        //reader.onload = () => {
-        //    console.log(1);
-        //    console.log(reader.result)
-        //    const base64 = reader.result.replace("data:application/pdf;base64,", "");
-        //    console.log(base64)
-        //    inputs['file'] = base64
-            //setBase64String(base64);
-            //console.log(base64String);
-        //}
         await new Promise((resolve) => {
             reader.readAsDataURL(fileBlob);
             reader.onload = () => {
@@ -302,11 +319,18 @@ function Resource() {
       }}
       >
             {researchs.map((research) => (
-                <SwiperSlide > <Research handleClick={handleOpenModal} data={{title: research.title, information: research.information,
-                    link: research.link, research_id: research.research_id, tag: research.tag,  file: research.file, name: research.user_info[0].name}}/>
-
+                currentUser.isProfessor ?
+                (currentUser._id === research.user_info[0]._id ?
+               <SwiperSlide > <Research handleClick={handleOpenApply} data={{title: research.title, information: research.information,
+                    link: research.link, research_id: research.research_id, tag: research.tag,  file: research.file, name: research.user_info[0].name, email: research.user_info[0].email}}/>
+                </SwiperSlide>:
+               null) : <SwiperSlide > <Research handleClick={handleOpenApply} data={{title: research.title, information: research.information,
+                    link: research.link, research_id: research.research_id, tag: research.tag,  file: research.file, name: research.user_info[0].name, email: research.user_info[0].email}}/>
                 </SwiperSlide>
-                ))}
+
+                )
+
+                )})}
 
       </Swiper>
 }
@@ -362,7 +386,12 @@ function Resource() {
 
         <Modal isOpen={isApplyModalOpen} onClose={handleCloseModal}>
 
-        <p>A</p>
+        <label className="block mb-2 mt-4 text-lg font-bold font-sans text-colegio-background" htmlFor="file">Upload
+                      file</label>
+                  <input
+                      id="file" type="file" accept=".pdf" className="block w-full text-lg bg-colegio-green border border-colegio-background rounded-lg cursor-pointer text-colegio-background focus:outline-none placeholder-blue-700 "
+                       onChange={handleFileChange}/>
+                  <button onClick={handleApplySubmit} disabled={!fileUploaded} className="disabled:opacity-25 mt-2 bg-colegio-green-2 text-colegio-dark-green font-sans font-bold rounded-lg p-2 float-right"> Submit </button>
 
         </Modal>
 
