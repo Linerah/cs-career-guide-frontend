@@ -87,10 +87,12 @@ function Resource() {
     const [isModalOpen, setIsModalOpen] = useState(false); // This one is to simplify hiding carousel
     const [isBlogModalOpen, setIsBlogModalOpen] = useState(false);
     const [isResearchModalOpen, setIsResearchModalOpen] = useState(false);
-    const [isApplyModalOpen, setIsApplyModalOpen] = useState(false)
+    const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+    const [isResumeSent, setIsResumeSent] = useState(false);
+
     const handleOpenApply = (info) => {
+        setIsResumeSent(false); // In case of opening another research after sending
         setIsModalOpen(true);
-        console.log(info)
         setIsApplyModalOpen(true);
         setProfData(info)
     };
@@ -105,7 +107,6 @@ function Resource() {
     };
 
     const handleCloseModal = () => {
-        console.log(1)
         setIsBlogModalOpen(false);
         setIsResearchModalOpen(false);
         setIsApplyModalOpen(false);
@@ -143,7 +144,6 @@ function Resource() {
                 setFileUploaded(true);
             };
         reader.readAsDataURL(uploadedFile);
-        console.log(uploadedFile);
         setSelectedFile(uploadedFile);
         };
 
@@ -166,10 +166,9 @@ function Resource() {
 
 
     });
-        console.log(input)
+
         await axios.post(`https://cs-career-guide-email-service.herokuapp.com/research`, input);
-        setIsApplyModalOpen(false);
-        setIsModalOpen(false);
+        setIsResumeSent(true);
     }
 
     async function handleResearchSubmit(event) {
@@ -385,13 +384,14 @@ function Resource() {
     {/* Modal for Apply */}
 
         <Modal isOpen={isApplyModalOpen} onClose={handleCloseModal}>
-
-        <label className="block mb-2 mt-4 text-lg font-bold font-sans text-colegio-background" htmlFor="file">Upload
-                      file</label>
+            {!isResumeSent ? (<div>            <label className="block mb-2 mt-4 text-lg font-bold font-sans text-colegio-background" htmlFor="file">Upload your resume</label>
                   <input
                       id="file" type="file" accept=".pdf" className="block w-full text-lg bg-colegio-green border border-colegio-background rounded-lg cursor-pointer text-colegio-background focus:outline-none placeholder-blue-700 "
                        onChange={handleFileChange}/>
                   <button onClick={handleApplySubmit} disabled={!fileUploaded} className="disabled:opacity-25 mt-2 bg-colegio-green-2 text-colegio-dark-green font-sans font-bold rounded-lg p-2 float-right"> Submit </button>
+ </div>):
+                (<div><p className="text-center mb-2 mt-4 text-lg font-bold font-sans text-colegio-background">Your resume has been sent!</p>
+                        <p className="text-center mb-2 mt-4 text-lg font-bold font-sans text-colegio-background">Thank you for your interest!</p></div>)}
 
         </Modal>
 
