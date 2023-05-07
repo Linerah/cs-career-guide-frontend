@@ -5,7 +5,7 @@ import {AuthContext} from "../auth/AuthContext";
 const Banner = ({page}) =>{
     
     const {currentUser} = useContext((AuthContext))
-    let aiButtonClass;
+    let feedbackButtonClass;
     let resourcesButtonClass
     let quizButtonClass;
 
@@ -13,19 +13,27 @@ const Banner = ({page}) =>{
 
     switch (page){
         case 'home':
-            aiButtonClass = 'Menu_button';
+            feedbackButtonClass = 'Menu_button';
             resourcesButtonClass = 'Menu_button underline underline-offset-4';
             quizButtonClass = 'Menu_button';
+
             break;
 
         case 'quiz':
-            aiButtonClass = 'Menu_button';
+            feedbackButtonClass = 'Menu_button';
             resourcesButtonClass = 'Menu_button';
             quizButtonClass = 'Menu_button underline underline-offset-4';
             break;
 
+        case 'feedback':
+            feedbackButtonClass = 'Menu_button underline underline-offset-4';
+            resourcesButtonClass = 'Menu_button';
+            quizButtonClass = 'Menu_button ';
+            break;
+
+
         default:
-            aiButtonClass = 'Menu_button';
+            feedbackButtonClass = 'Menu_button';
             resourcesButtonClass = 'Menu_button';
             quizButtonClass = 'Menu_button';
     }
@@ -47,7 +55,9 @@ const Banner = ({page}) =>{
                 </div>
                 <div className= {quizButtonClass} onClick={() => navigate('/quiz') }>
                     Quiz
-
+                </div>
+                <div className={feedbackButtonClass} onClick={() => navigate(('/feedback'))}>
+                    Feedback
                 </div>
             </div>
 

@@ -10,6 +10,7 @@ import "./App.css"
 import { AuthContext } from "./auth/AuthContext";
 import Auth from './auth/Auth';
 import Quiz from "./quiz/quiz";
+import Feedback from "./feedback/feedback";
 function App() {
 
   const { currentUser } = useContext(AuthContext);
@@ -59,6 +60,15 @@ function App() {
           <ProtectedRoute>
           <Layout>
             <Quiz />
+          </Layout>
+          </ProtectedRoute>),
+    },
+    {
+      path: "/feedback",
+      element:(
+          <ProtectedRoute>
+          <Layout>
+            <Feedback />
           </Layout>
           </ProtectedRoute>),
     }
